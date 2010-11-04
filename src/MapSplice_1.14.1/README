@@ -1,0 +1,15 @@
+MapSplice is an algorithm for mapping RNA-seq data to reference genome for splice junction discovery.
+
+Features of MapSplice include
+
+1. generalization to both short-reads and long reads.
+
+2. both CPU and memory efficient.
+
+3. discovery of both canonical, semi-canonical and non-canonical junctions.
+
+4. splice inference based on the alignment quality and diversity of reads mapped to a junction.
+
+5. identification of chimeric events (intra-chromosomes and inter-chromosomes, inter-strands) with long reads
+
+For more information, please see http://www.netlab.uky.edu/p/bioinfo/MapSplice

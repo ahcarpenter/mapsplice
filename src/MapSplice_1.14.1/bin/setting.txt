@@ -1,0 +1,34 @@
+/************************************************************************/
+/* Configuration file                                                   */
+/************************************************************************/
+
+//distribution of the PER distances
+const double PERPathDistanceMean: //mean of the distance distribution
+112
+
+const double PERPathDistanceSD: //standard deviation of the distance distribution
+40
+
+
+//size of input data
+const long MAX_JUNCTION_NUM //maximum number of input junctions
+100000
+
+const long MAX_LENGTH  //maximum number of input reads. (two times input PER alignments)
+10000000
+
+
+//setting
+const int MAX_PATH_NUM //size of the path queue.
+1000
+
+const double MIN_PATH_PROBABILITY //largest deviation from mean distance. paths with length less than mean-MIN_PATH_PROBABILITY or larger than mean+MIN_PATH_PROBABILITY will be filtered.
+100
+
+
+//EM hard decision
+const double MIN_HD_PER_PROB //minimum read probability to be considered in hard decision __ sequenced segment
+0.0
+
+const double MIN_HD_PATH_PROB //minimum path probability to be considered in hard decision __ unsequenced segment, give the largest tolerance of the distance deviation
+0.0

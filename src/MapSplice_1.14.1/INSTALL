@@ -1,0 +1,11 @@
+MapSplice Installation
+
+No installation is required if pre-compiled binaries in bin/ are compatible with your system
+
+If pre-compiled binaries are incompatible with your system, you will need to rebuild them from source
+
+Go the root directory and type "make", the binaries (64-bit) will be built at bin/. Any existing files will be overwritten
+
+You need to download bowite 0.10.1 from http://sourceforge.net/projects/bowtie-bio/files/ and put bowtie and bowtie-build in bin/
+
+The manual of MapSplice is at http://www.netlab.uky.edu/p/bioinfo/MapSpliceManual

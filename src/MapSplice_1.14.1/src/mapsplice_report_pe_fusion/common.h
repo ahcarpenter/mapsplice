@@ -1,0 +1,16 @@
+const int MAX_READ_LENGTH=1000;
+const int MAX_READID_LENGTH=1000;
+const int MAX_SEGNO_LENGTH=100;
+const int MAX_STRAND_LENGTH=5;
+const int MAX_CHROM_LENGTH=1000;
+const int MAX_MISMATCH_LENGTH=1000;
+const int MAX_UNMAPPED_INDEX=1000;
+const int MAX_JUMPCODE_DIGITS=15;
+const int HOLE=0;
+const int HMER=1;
+const int HEAD=2;
+const int TAIL=3;
+const int HEAD_SEG_NO=1;
+const char * jumpcode_spliter = "MN"; 
+const char jumpcode_type[] = {'M','N'};
+const char * mismatch_spliter = ",:";
