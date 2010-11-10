@@ -31,44 +31,46 @@ class MSInterface:
         settings = gtk.settings_get_default()
         settings.props.gtk_button_images = True
 
-        builder = gtk.Builder()
-        builder.add_from_file("config_interface.glade")
-        self.actionArea = builder.get_object("actionArea")
-        self.gettingStarted = builder.get_object("gettingStarted")
-        self.treeview = builder.get_object("treeview")
-        self.readListVP = builder.get_object("readListVP")
-        self.ioWindow = builder.get_object("ioWindow")
-        self.bibEntry = builder.get_object("bibText")
-        self.basicOptionsWindow = builder.get_object("basicOptionsWindow")
-        self.advancedOptionsWindow = builder.get_object("advancedOptionsWindow")
-        self.splash = builder.get_object("SplashScreen")
-        self.fileSelectWindow = builder.get_object("FileSelect")
-        self.treeView = builder.get_object("treeView")
-        self.errorMessage = builder.get_object("ErrorMessage")
-        self.errorLabel = builder.get_object("errorLabel")
-        self.FileChooserDialog1 = builder.get_object("FileChooserDialog1")
-        self.FileChooserDialog2 = builder.get_object("FileChooserDialog2")
-        self.BowtieIndexSelect = builder.get_object("BowtieIndexSelect")
-        self.BowtieFolderSelect = builder.get_object("BowtieFolderSelect")
-        self.basenameSetWindow = builder.get_object("basenameSetWindow")
-        self.basenameLabel = builder.get_object("basenameLabel")
-        self.MSO = builder.get_object("MSO")
-        self.MaxH = builder.get_object("MaxH")
-        self.MSI = builder.get_object("MSI")
-        self.bowtieBasename = builder.get_object("bowtieBasename")
-        self.gffFilter = builder.get_object("gffFilter")
-        self.readFilter = builder.get_object("readFilter")
-        self.bowtieFilter = builder.get_object("bowtieFilter")
-        self.envPathInput = builder.get_object("envPathInput")
-        self.FileChooserDialog3 = builder.get_object("FileChooserDialog3")
-        self.termOut = builder.get_object("termOut")
-        self.terminalOutput = builder.get_object("terminalOutput")
-        self.helpDialog = builder.get_object("helpDialog")
-        self.aboutdialog1 = builder.get_object("aboutdialog1")
-        self.chrDirChooser = builder.get_object("chrDirChooser")
-        self.MOS = builder.get_object("MOS")
-        self.MH = builder.get_object("MH")
-        self.MI = builder.get_object("MI")
+        self.builder = gtk.Builder()
+        self.builder.add_from_file("config_interface.glade")
+        self.actionArea = self.builder.get_object("actionArea")
+        self.regionsOfInterest = self.builder.get_object("regionsOfInterest")
+        self.regionsToAvoidFileButton = self.builder.get_object("regionsToAvoidFileButton")
+        self.gettingStarted = self.builder.get_object("gettingStarted")
+        self.treeview = self.builder.get_object("treeview")
+        self.readListVP = self.builder.get_object("readListVP")
+        self.ioWindow = self.builder.get_object("ioWindow")
+        self.bibEntry = self.builder.get_object("bibText")
+        self.basicOptionsWindow = self.builder.get_object("basicOptionsWindow")
+        self.advancedOptionsWindow = self.builder.get_object("advancedOptionsWindow")
+        self.splash = self.builder.get_object("SplashScreen")
+        self.fileSelectWindow = self.builder.get_object("FileSelect")
+        self.treeView = self.builder.get_object("treeView")
+        self.errorMessage = self.builder.get_object("ErrorMessage")
+        self.errorLabel = self.builder.get_object("errorLabel")
+        self.FileChooserDialog1 = self.builder.get_object("FileChooserDialog1")
+        self.FileChooserDialog2 = self.builder.get_object("FileChooserDialog2")
+        self.BowtieIndexSelect = self.builder.get_object("BowtieIndexSelect")
+        self.BowtieFolderSelect = self.builder.get_object("BowtieFolderSelect")
+        self.basenameSetWindow = self.builder.get_object("basenameSetWindow")
+        self.basenameLabel = self.builder.get_object("basenameLabel")
+        self.MSO = self.builder.get_object("MSO")
+        self.MaxH = self.builder.get_object("MaxH")
+        self.MSI = self.builder.get_object("MSI")
+        self.bowtieBasename = self.builder.get_object("bowtieBasename")
+        self.gffFilter = self.builder.get_object("gffFilter")
+        self.readFilter = self.builder.get_object("readFilter")
+        self.bowtieFilter = self.builder.get_object("bowtieFilter")
+        self.envPathInput = self.builder.get_object("envPathInput")
+        self.FileChooserDialog3 = self.builder.get_object("FileChooserDialog3")
+        self.termOut = self.builder.get_object("termOut")
+        self.terminalOutput = self.builder.get_object("terminalOutput")
+        self.helpDialog = self.builder.get_object("helpDialog")
+        self.aboutdialog1 = self.builder.get_object("aboutdialog1")
+        self.chrDirChooser = self.builder.get_object("chrDirChooser")
+        self.MOS = self.builder.get_object("MOS")
+        self.MH = self.builder.get_object("MH")
+        self.MI = self.builder.get_object("MI")
         self.gffFilter.add_pattern("*.gff")
         self.readFilter.add_pattern("*.fa")
         self.readFilter.add_pattern("*.fq")
@@ -76,6 +78,8 @@ class MSInterface:
         self.readFilter.add_pattern("*.fastq")
         self.readFilter.add_pattern("*.txt")
         self.bowtieFilter.add_pattern("*.ebwt")
+        self.threads = self.builder.get_object("threads")
+        self.anchor_length = self.builder.get_object("anchor_length")
         self.treestore = gtk.ListStore(str, str, str)
         
        
@@ -113,88 +117,103 @@ class MSInterface:
         
         
         #get input buttons & initialize
-        self.threads = builder.get_object("threads")
-        self.threads.set_value(1)
-        self.threads.set_range(1, 100)
-        self.anchor_length = builder.get_object("anchor_length")
-        self.anchor_length.set_range(6, 12)
-        self.anchor_length.set_value(8)
-        self.segment_mismatches = builder.get_object("segment_mismatches")
-        self.segment_mismatches.set_range(0, 3)
-        self.segment_mismatches.set_value(1)
-        self.splice_mismatches = builder.get_object("splice_mismatches")
-        self.splice_mismatches.set_range(0, 10)
-        self.splice_mismatches.set_value(1)
-        self.remap_mismatches = builder.get_object("remap_mismatches")
-        self.remap_mismatches.set_range(0, 3)
-        self.remap_mismatches.set_value(2)
-        self.min_intron_length = builder.get_object("min_intron_length")
-        self.min_intron_length.set_range(1, 100000000)
-        self.min_intron_length.set_value(10)
-        self.max_intron_length = builder.get_object("max_intron_length")
-        self.max_intron_length.set_range(1, 200000000) #min_intron always <= max_intron
-        self.max_intron_length.set_value(200000)
-        self.read_length = builder.get_object("read_len")
-        self.read_length.set_value(36)
-        self.read_len = 36
-        self.read_length.set_range(36, 100000000)
-        self.segment_length = builder.get_object("segment_len")
-        self.segment_length.set_value(18)
-        self.segment_length.set_range(18, 25)
-        self.max_insert = builder.get_object("max_insert")
-        self.max_insert.set_range(0, 3)
-        self.max_insert.set_value(3)
-        self.min_output_seg = builder.get_object("min_output_seg")
-        self.min_output_seg.set_range(1, 2)
-        self.min_output_seg.set_value(2)
-        self.max_hits = builder.get_object("max_hits")
-        self.max_hits.set_range(1, 100)
-        self.max_hits.set_value(4)
-        self.canonButton = builder.get_object("canonicalRadio")
-        self.canonButton.set_active(True)
-        self.singleButton = builder.get_object("singleButton")
-        self.singleButton.set_active(True)
-        self.on_singleButton_clicked(self.singleButton) #so column headers update
-        self.fastaButton = builder.get_object("fastaButton")
-        self.fastaButton.set_active(True)
+        self.segment_mismatches = self.builder.get_object("segment_mismatches")
+        self.splice_mismatches = self.builder.get_object("splice_mismatches")
+        self.remap_mismatches = self.builder.get_object("remap_mismatches")
+        self.min_intron_length = self.builder.get_object("min_intron_length")
+        self.max_intron_length = self.builder.get_object("max_intron_length")
+        self.read_length = self.builder.get_object("read_len")
+        self.segment_length = self.builder.get_object("segment_len")
+        self.max_insert = self.builder.get_object("max_insert")
+        self.min_output_seg = self.builder.get_object("min_output_seg")
+        self.max_hits = self.builder.get_object("max_hits")
+        self.canonButton = self.builder.get_object("canonicalRadio")
+        self.singleButton = self.builder.get_object("singleButton")
+        self.fastaButton = self.builder.get_object("fastaButton")
+    
+
         
         
         #Get Message Dialog's
-        self.FileChooserDialog = builder.get_object("FileChooserDialog")
-        self.ReadSelectHelpBox = builder.get_object("readSelectHelp")
-        self.RTA = builder.get_object("RTA")
-        self.OP = builder.get_object("OP")
-        self.BIB = builder.get_object("BIB")
-        self.ROI = builder.get_object("ROI")
-        self.CFD = builder.get_object("CFD")
-        self.IRF = builder.get_object("IRF")
-        self.RT = builder.get_object("RT")
-        self.RL = builder.get_object("RL")
-        self.SL = builder.get_object("SL")
-        self.OO = builder.get_object("OO")
-        self.DTF1 = builder.get_object("DTF1")
-        self.DTF = builder.get_object("DTF")
-        self.AL = builder.get_object("AL")
-        self.ASegM = builder.get_object("ASegM")
-        self.ASplM = builder.get_object("ASplM")
-        self.ARM = builder.get_object("ARM")
-        self.MIL = builder.get_object("MIL")
-        self.MaxIL = builder.get_object("MaxIL")
-        self.TH = builder.get_object("TH")
-        self.SEC = builder.get_object("SEC")
-        self.MSD = builder.get_object("MSD")
-        self.RM = builder.get_object("RM")
-        self.OFJ = builder.get_object("OFJ")
-        self.GCR = builder.get_object("GCR")
-        #self.readList = builder.get_object("readList")
+        self.FileChooserDialog = self.builder.get_object("FileChooserDialog")
+        self.ReadSelectHelpBox = self.builder.get_object("readSelectHelp")
+        self.RTA = self.builder.get_object("RTA")
+        self.OP = self.builder.get_object("OP")
+        self.BIB = self.builder.get_object("BIB")
+        self.ROI = self.builder.get_object("ROI")
+        self.CFD = self.builder.get_object("CFD")
+        self.IRF = self.builder.get_object("IRF")
+        self.RT = self.builder.get_object("RT")
+        self.RL = self.builder.get_object("RL")
+        self.SL = self.builder.get_object("SL")
+        self.OO = self.builder.get_object("OO")
+        self.DTF1 = self.builder.get_object("DTF1")
+        self.DTF = self.builder.get_object("DTF")
+        self.AL = self.builder.get_object("AL")
+        self.ASegM = self.builder.get_object("ASegM")
+        self.ASplM = self.builder.get_object("ASplM")
+        self.ARM = self.builder.get_object("ARM")
+        self.MIL = self.builder.get_object("MIL")
+        self.MaxIL = self.builder.get_object("MaxIL")
+        self.TH = self.builder.get_object("TH")
+        self.SEC = self.builder.get_object("SEC")
+        self.MSD = self.builder.get_object("MSD")
+        self.RM = self.builder.get_object("RM")
+        self.OFJ = self.builder.get_object("OFJ")
+        self.GCR = self.builder.get_object("GCR")
+        #self.readList = self.builder.get_object("readList")
         #self.readList.append([0,'red',colormap.alloc_color('red')
-       # self.readListView = builder.get_object("readListView")
+       # self.readListView = self.builder.get_object("readListView")
         #self.readListView.set_model(self.readList)
         #self.readListView.set_headers_visible(self.readListView.get_headers_visible())
         
-        builder.connect_signals(self) 
+        self.builder.connect_signals(self) 
 
 #Getting Started
+    def init_input(self):
+        self.threads.set_value(1)
+        self.threads.set_range(1, 100)
+        
+        self.anchor_length.set_range(6, 12)
+        self.anchor_length.set_value(8)
+        
+        self.segment_mismatches.set_range(0, 3)
+        self.segment_mismatches.set_value(1)
+        
+        self.splice_mismatches.set_range(0, 10)
+        self.splice_mismatches.set_value(1)
+        
+        self.remap_mismatches.set_range(0, 3)
+        self.remap_mismatches.set_value(2)
+        
+        self.min_intron_length.set_range(1, 100000000)
+        self.min_intron_length.set_value(10)
+        
+        self.max_intron_length.set_range(1, 200000000) #min_intron always <= max_intron
+        self.max_intron_length.set_value(200000)
+        
+        self.read_length.set_value(36)
+        self.read_len = 36
+        self.read_length.set_range(36, 100000000)
+        
+        self.segment_length.set_value(18)
+        self.segment_length.set_range(18, 25)
+        
+        self.max_insert.set_range(0, 3)
+        self.max_insert.set_value(3)
+        
+        self.min_output_seg.set_range(1, 2)
+        self.min_output_seg.set_value(2)
+        
+        self.max_hits.set_range(1, 100)
+        self.max_hits.set_value(4)
+        
+        self.canonButton.set_active(True)
+        
+        self.singleButton.set_active(True)
+        self.on_singleButton_clicked(self.singleButton) #so column headers update
+        
+        self.fastaButton.set_active(True)
 
     def update_config_file(self):
         configFile = open("../MapSplice.cfg", "r")
@@ -205,6 +224,7 @@ class MSInterface:
         chromosome_files_directory = "chromosome_files_directory = "
         Bowtieidx = "Bowtieidx = "
         interested_regions = "interested_regions = "
+        avoid_regions = "avoid_regions = "
         reads_format = "reads_format = "
         paired_end = "paired_end = "
         read_length = "read_length = "
@@ -231,19 +251,27 @@ class MSInterface:
         for item in configFileList:
             if chromosome_files_directory in item:
                 item = chromosome_files_directory + self.chrDirChooser.get_filename() + "\n"
+            
             if Bowtieidx in item:
                 dir = os.path.abspath(os.curdir)
                 dir = os.path.split(dir)[0].rstrip() + "/BowtieIndexFiles"
                 if not os.path.exists(dir):
                     os.makedirs(dir)
-                item = Bowtieidx + dir + "index\n"
+                item = Bowtieidx + dir + "/index\n"
 
-            if interested_regions in item:
-                item = interested_regions + "FASTQ\n"
+            if interested_regions in item and self.regionsOfInterest.get_filename() != None:
+                item = interested_regions + self.regionsOfInterest.get_filename() +"\n"
+                
+            if avoid_regions in item and self.regionsToAvoidFileButton.get_filename() != None:
+                item = avoid_regions + self.regionsToAvoidFileButton.get_filename() +"\n"
 
             if reads_format in item:
-                item = reads_format + "FASTQ\n"
-
+                button = self.builder.get_object("fastaButton")
+                if button.get_active:
+                    item = reads_format + "FASTA\n"
+                else:
+                    item = reads_format + "FASTQ\n"
+                    
             if paired_end in item:
                 item = paired_end + "FASTQ\n"
 
@@ -1233,6 +1261,6 @@ class MSInterface:
 if __name__ == "__main__":
     configInterface = MSInterface()
     configInterface.gettingStarted.show()
+    configInterface.init_input()
     configInterface.update_config_file()
     gtk.main()
-

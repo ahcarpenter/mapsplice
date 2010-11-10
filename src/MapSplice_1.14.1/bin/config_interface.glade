@@ -1596,9 +1596,8 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox38">
+                          <object class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
-                            <property name="homogeneous">True</property>
                             <child>
                               <object class="GtkButton" id="addRead">
                                 <property name="visible">True</property>
@@ -1969,9 +1968,9 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                         <property name="visible">True</property>
                         <property name="orientation">vertical</property>
                         <property name="homogeneous">True</property>
-                        <property name="filter">gffFilter</property>
                         <property name="create_folders">False</property>
                         <property name="action">select-folder</property>
+                        <property name="filter">gffFilter</property>
                         <property name="width_chars">0</property>
                         <signal name="selection_changed" handler="on_CFD_selection_changed"/>
                       </object>
@@ -2033,8 +2032,8 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                         <child>
                           <object class="GtkFileChooserButton" id="regionsToAvoidFileButton">
                             <property name="visible">True</property>
-                            <property name="filter">gffFilter</property>
                             <property name="create_folders">False</property>
+                            <property name="filter">gffFilter</property>
                             <property name="width_chars">30</property>
                             <signal name="file_set" handler="on_regionsToAvoidFileButton_file_set"/>
                             <signal name="file_activated" handler="on_regionsToAvoidFileButton_file_set"/>
@@ -2091,10 +2090,10 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkFileChooserButton" id="filechooserbutton6">
+                          <object class="GtkFileChooserButton" id="regionsOfInterest">
                             <property name="visible">True</property>
-                            <property name="filter">gffFilter</property>
                             <property name="create_folders">False</property>
+                            <property name="filter">gffFilter</property>
                             <property name="width_chars">30</property>
                             <signal name="file_set" handler="on_ROA_file_set"/>
                             <signal name="file_activated" handler="on_ROA_file_set"/>
@@ -4355,18 +4354,6 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
     <property name="visible">True</property>
     <property name="icon_name">help</property>
   </object>
-  <object class="GtkImage" id="image17">
-    <property name="visible">True</property>
-    <property name="icon_name">add</property>
-  </object>
-  <object class="GtkImage" id="image18">
-    <property name="visible">True</property>
-    <property name="stock">gtk-clear</property>
-  </object>
-  <object class="GtkImage" id="image19">
-    <property name="visible">True</property>
-    <property name="stock">gtk-help</property>
-  </object>
   <object class="GtkImage" id="image23">
     <property name="visible">True</property>
     <property name="stock">gtk-dialog-question</property>
@@ -4450,10 +4437,6 @@ Andrew Hefley Carpenter
   </object>
   <object class="GtkTreeViewColumn" id="treeviewcolumn1">
     <property name="title">column</property>
-  </object>
-  <object class="GtkImage" id="image35">
-    <property name="visible">True</property>
-    <property name="icon_name">list-remove</property>
   </object>
   <object class="GtkAdjustment" id="adjustment18">
     <property name="upper">100</property>
@@ -4624,5 +4607,21 @@ The value represents the minimal number of segments contained in an alignment.</
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="stock">gtk-dialog-question</property>
+  </object>
+  <object class="GtkImage" id="image19">
+    <property name="visible">True</property>
+    <property name="stock">gtk-help</property>
+  </object>
+  <object class="GtkImage" id="image18">
+    <property name="visible">True</property>
+    <property name="stock">gtk-clear</property>
+  </object>
+  <object class="GtkImage" id="image35">
+    <property name="visible">True</property>
+    <property name="icon_name">list-remove</property>
+  </object>
+  <object class="GtkImage" id="image17">
+    <property name="visible">True</property>
+    <property name="icon_name">add</property>
   </object>
 </interface>
