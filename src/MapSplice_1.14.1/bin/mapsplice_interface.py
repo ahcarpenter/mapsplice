@@ -53,6 +53,7 @@ class MSInterface:
         self.BowtieIndexSelect = self.builder.get_object("BowtieIndexSelect")
         self.BowtieFolderSelect = self.builder.get_object("BowtieFolderSelect")
         self.basenameSetWindow = self.builder.get_object("basenameSetWindow")
+        self.runTypeSelect = self.builder.get_object("runTypeSelect")
         self.basenameLabel = self.builder.get_object("basenameLabel")
         self.MSO = self.builder.get_object("MSO")
         self.MaxH = self.builder.get_object("MaxH")
@@ -71,6 +72,8 @@ class MSInterface:
         self.MOS = self.builder.get_object("MOS")
         self.MH = self.builder.get_object("MH")
         self.MI = self.builder.get_object("MI")
+        self.configFilter = self.builder.get_object("configFilter")
+        self.configFilter.add_pattern("*.cfg")
         self.gffFilter.add_pattern("*.gff")
         self.readFilter.add_pattern("*.fa")
         self.readFilter.add_pattern("*.fq")
@@ -339,7 +342,22 @@ class MSInterface:
         
        
         self.configFileWrite.close()
-
+        
+    def on_regionsToAvoid_toggled(self, checkButton):
+        if checkButton.get_active() is True:
+            self.regionsToAvoidFileButton.set_sensitive(True)
+        else:
+            self.regionsToAvoidFileButton.set_sensitive(False)
+            
+    def on_regionsOfInterest_toggled(self, checkButton):
+        if checkButton.get_active() is True:
+            self.regionsOfInterest.set_sensitive(True)
+        else:
+            self.regionsOfInterest.set_sensitive(False)
+    
+    def on_runTypeShow_clicked(self, widget):
+        self.runTypeSelect.show()
+    
     def on_main_delete_event(self, widget, event):
         exit()
 
@@ -773,6 +791,14 @@ class MSInterface:
         keyname = gtk.gdk.keyval_name(event.keyval)
         if "Return" in keyname or "Esc" in keyname:
             widget.hide();
+            
+    def key_press_event_runType(self, widget, event):
+        keyname = gtk.gdk.keyval_name(event.keyval)
+        if "Esc" in keyname:
+            widget.hide();
+            
+        if "Return" in keyname:
+                self.on_executeMS_clicked(widget)
             
     def key_press_event_basename(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
