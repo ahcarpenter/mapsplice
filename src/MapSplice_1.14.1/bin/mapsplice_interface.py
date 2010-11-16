@@ -22,17 +22,29 @@ class MSInterface:
     
     def __init__(self):
         self.fileCount = 1
+        self.basenameSet = 0
+        self.basename = ""
+        self.reads = ""
+        self.io_ok_clicked = 0
+        self.roiActive = 0
+        self.rtaActive = 0
         self.tempCount = 0
         self.readSet = 1
         self.paired = 1
+        self.readsAdded = 0
+        self.refGenomeAdded = 0
+        self.outputPathAdded = 0
         self.setLabelAdded = 1
         self.row = 0
+        self.configFilePath = "../MapSplice.cfg"
+        self.defaultConfig = 1
        
         settings = gtk.settings_get_default()
         settings.props.gtk_button_images = True
 
         self.builder = gtk.Builder()
         self.builder.add_from_file("config_interface.glade")
+        self.configFileChooser = self.builder.get_object("configFileChooser")
         self.actionArea = self.builder.get_object("actionArea")
         self.regionsOfInterest = self.builder.get_object("regionsOfInterest")
         self.regionsToAvoidFileButton = self.builder.get_object("regionsToAvoidFileButton")
@@ -41,6 +53,7 @@ class MSInterface:
         self.readListVP = self.builder.get_object("readListVP")
         self.ioWindow = self.builder.get_object("ioWindow")
         self.bibEntry = self.builder.get_object("bibText")
+        self.defaultRunButton = self.builder.get_object("defaultRun")
         self.basicOptionsWindow = self.builder.get_object("basicOptionsWindow")
         self.advancedOptionsWindow = self.builder.get_object("advancedOptionsWindow")
         self.splash = self.builder.get_object("SplashScreen")
@@ -133,10 +146,8 @@ class MSInterface:
         self.canonButton = self.builder.get_object("canonicalRadio")
         self.singleButton = self.builder.get_object("singleButton")
         self.fastaButton = self.builder.get_object("fastaButton")
+        self.loadFromConfigFileButton = self.builder.get_object("loadFromConfigFileButton")
     
-
-        
-        
         #Get Message Dialog's
         self.FileChooserDialog = self.builder.get_object("FileChooserDialog")
         self.ReadSelectHelpBox = self.builder.get_object("readSelectHelp")
@@ -217,13 +228,15 @@ class MSInterface:
         self.on_singleButton_clicked(self.singleButton) #so column headers update
         
         self.fastaButton.set_active(True)
+        self.defaultRunButton.set_active(True)
 
     def update_config_file(self):
         configFile = open("../MapSplice.cfg", "r")
         configFileList = configFile.readlines()
         configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
+        self.configFileWrite = open(self.configFilePath, "w")
         reads_file = "reads_file = "
+        output_dir = "output_dir = "
         chromosome_files_directory = "chromosome_files_directory = "
         Bowtieidx = "Bowtieidx = "
         interested_regions = "interested_regions = "
@@ -242,118 +255,192 @@ class MSInterface:
         min_intron_length = "min_intron_length = "
         max_intron_length = "max_intron_length = "
         threads = "threads = "
-        max_hit = "max_hit = "
+        max_hits = "max_hits = "
         max_insert = "max_insert = "
         min_output_seg = "min_output_seg = "
         search_whole_chromosome = "search_whole_chromosome = "
         map_segment_directly = "map_segment_directly = "
+        reads_file = "reads_file = "
         run_MapPER = "run_MapPER = "
         do_fusion = "do_fusion = "
         do_cluster = "do_cluster = "
         
-        for item in configFileList:
-            if chromosome_files_directory in item:
-                item = chromosome_files_directory + self.chrDirChooser.get_filename() + "\n"
-            
-            if Bowtieidx in item:
-                dir = os.path.abspath(os.curdir)
-                dir = os.path.split(dir)[0].rstrip() + "/BowtieIndexFiles"
-                if not os.path.exists(dir):
-                    os.makedirs(dir)
-                item = Bowtieidx + dir + "/index\n"
-
-            if interested_regions in item and self.regionsOfInterest.get_filename() != None:
-                item = interested_regions + self.regionsOfInterest.get_filename() +"\n"
+        if self.io_ok_clicked is 1:
+            for item in configFileList:
                 
-            if avoid_regions in item and self.regionsToAvoidFileButton.get_filename() != None:
-                item = avoid_regions + self.regionsToAvoidFileButton.get_filename() +"\n"
-
-            if reads_format in item:
-                button = self.builder.get_object("fastaButton")
-                if button.get_active:
-                    item = reads_format + "FASTA\n"
-                else:
-                    item = reads_format + "FASTQ\n"
-                    
-            if paired_end in item:
-                item = paired_end + "FASTQ\n"
-
-            if read_length in item:
-                item = read_length + "FASTQ\n"
-
-            if segment_length in item:
-                item = segment_length + "FASTQ\n"
-
-            if junction_type in item:
-                item = junction_type + "FASTQ\n"
-
-            if full_running in item:
-                item = full_running + "FASTQ\n"
-
-            if anchor_length in item:
-                item = anchor_length + "FASTQ\n"
-
-            if remove_temp_files in item:
-                item = remove_temp_files + "FASTQ\n"
-
-            if segment_mismatches in item:
-                item = segment_mismatches + "FASTQ\n"
-
-            if splice_mismatches in item:
-                item = splice_mismatches + "FASTQ\n"
-
-            if remap_mismatches in item:
-                item = remap_mismatches + "FASTQ\n"
-
-            if min_intron_length in item:
-                item = min_intron_length + "FASTQ\n"
-
-            if max_intron_length in item:
-                item = max_intron_length + "FASTQ\n"
-
-            if threads in item:
-                item = threads + "FASTQ\n"
-
-            if max_hit in item:
-                item = max_hit + "FASTQ\n"
-
-            if max_insert in item:
-                item = max_insert + "FASTQ\n"
-
-            if min_output_seg in item:
-                item = min_output_seg + "FASTQ\n"
-
-            if search_whole_chromosome in item:
-                item = search_whole_chromosome + "FASTQ\n"
-
-            if map_segment_directly in item:
-                item = map_segment_directly + "FASTQ\n"
-
-            if run_MapPER in item:
-                item = run_MapPER + "FASTQ\n"
-
-            if do_fusion in item:
-                item = do_fusion + "FASTQ\n"
-
-            if do_cluster in item:
-                item = do_cluster + "FASTQ\n"
+                if reads_file in item:
+                    if self.readsAdded is 1:
+                        item = reads_file + self.reads + "\n"
             
-            self.configFileWrite.write(item)
-        
-       
+                if chromosome_files_directory in item:
+                    if self.refGenomeAdded is 1:
+                        item = chromosome_files_directory + self.chrDirChooser.get_filename() + "\n"
+            
+                if Bowtieidx in item:
+                    if self.basenameSet is 1:
+                        item = Bowtieidx + self.basename + "\n"
+
+                if interested_regions in item and self.regionsOfInterest.get_filename() != None and self.roiActive is 1:
+                    item = interested_regions + self.regionsOfInterest.get_filename() + "\n"
+                
+                if avoid_regions in item and self.regionsToAvoidFileButton.get_filename() != None and self.rtaActive is 1:
+                    item = avoid_regions + self.regionsToAvoidFileButton.get_filename() + "\n"
+
+                if reads_format in item:
+                    button = self.builder.get_object("fastaButton")
+                    if button.get_active():
+                        item = reads_format + "FASTA\n"
+                    else:
+                        item = reads_format + "FASTQ\n"
+                    
+                if paired_end in item:
+                    button = self.builder.get_object("singleButton")
+                    if button.get_active():
+                        item = paired_end + "no\n"
+                    else:
+                        item = paired_end + "yes\n"
+
+                if read_length in item:
+                    button = self.builder.get_object("read_len")
+                    if read_length in item:
+                        item = read_length + str(button.get_value_as_int()) + "\n"
+
+                if segment_length in item:
+                    button = self.builder.get_object("segment_len")
+                    if segment_length in item:
+                        item = segment_length + str(button.get_value_as_int()) + "\n"
+                        
+                if output_dir in item and self.outputPathAdded is 1:
+                    button = self.builder.get_object("outputPath")
+                    item = output_dir + button.get_filename() + "\n"
+                self.configFileWrite.write(item)    
+                self.io_ok_clicked = 0
+        else:
+            for item in configFileList:
+                if junction_type in item:
+                    button = self.builder.get_object("canonicalRadio")
+                    if button.get_active():
+                        item = junction_type + "canonical\n"
+                    else:
+                        item = junction_type + "non-canonical\n"
+
+                if full_running in item:
+                    button = self.builder.get_object("remapCheck")
+                    if button.get_active():
+                        item = full_running + "yes\n"
+                    else:
+                        item = full_running + "no\n"
+
+                if anchor_length in item:
+                    button = self.builder.get_object("anchor_length")
+                    if anchor_length in item:
+                        item = anchor_length + str(button.get_value_as_int()) + "\n"
+
+                if remove_temp_files in item:
+                    button = self.builder.get_object("deleteTempCheck")
+                    if button.get_active():
+                        item = remove_temp_files + "yes\n"
+                    else:
+                        item = remove_temp_files + "no\n"
+
+                if segment_mismatches in item:
+                    button = self.builder.get_object("segment_mismatches")
+                    if segment_mismatches in item:
+                        item = segment_mismatches + str(button.get_value_as_int()) + "\n"
+
+                if splice_mismatches in item:
+                    button = self.builder.get_object("splice_mismatches")
+                    if splice_mismatches in item:
+                        item = splice_mismatches + str(button.get_value_as_int()) + "\n"
+
+                if remap_mismatches in item:
+                    button = self.builder.get_object("remap_mismatches")
+                    if remap_mismatches in item:
+                        item = remap_mismatches + str(button.get_value_as_int()) + "\n"
+                
+                if min_intron_length in item:
+                    button = self.builder.get_object("min_intron_length")
+                    if min_intron_length in item:
+                        item = min_intron_length + str(button.get_value_as_int()) + "\n"
+
+                if max_intron_length in item:
+                    button = self.builder.get_object("max_intron_length")
+                    if max_intron_length in item:
+                        item = max_intron_length + str(button.get_value_as_int()) + "\n"
+
+                if threads in item:
+                    button = self.builder.get_object("threads")
+                    if threads in item:
+                        item = threads + str(button.get_value_as_int()) + "\n"
+
+                if max_hits in item:
+                    button = self.builder.get_object("max_hits")
+                    if max_hits in item:
+                        item = max_hits + str(button.get_value_as_int()) + "\n"
+
+                if max_insert in item:
+                    button = self.builder.get_object("max_insert")
+                    if max_insert in item:
+                        item = max_insert + str(button.get_value_as_int()) + "\n"
+
+                if min_output_seg in item:
+                    button = self.builder.get_object("min_output_seg")
+                    if min_output_seg in item:
+                        item = min_output_seg + str(button.get_value_as_int()) + "\n"
+
+                if search_whole_chromosome in item:
+                    button = self.builder.get_object("searchWholeChr")
+                    if button.get_active():
+                        item = search_whole_chromosome + "yes\n"
+                    else:
+                        item = search_whole_chromosome + "no\n"
+
+                if map_segment_directly in item:
+                    button = self.builder.get_object("mapSegDirectly")
+                    if button.get_active():
+                        item = map_segment_directly + "yes\n"
+                    else:
+                        item = map_segment_directly + "no\n"
+
+                if run_MapPER in item:
+                    button = self.builder.get_object("mapPERButton")
+                    if button.get_active():
+                        item = run_MapPER + "yes\n"
+                    else:
+                        item = run_MapPER + "no\n"
+
+                if do_fusion in item:
+                    button = self.builder.get_object("fusionCheck")
+                    if button.get_active():
+                        item = do_fusion + "yes\n"
+                    else:
+                        item = do_fusion + "no\n"
+                self.configFileWrite.write(item)
         self.configFileWrite.close()
-        
+  
+    def on_loadConfig_toggled(self, widget):
+        if self.loadFromConfigFileButton.get_active() is True:
+            self.configFileChooser.set_sensitive(True)
+            self.defaultConfig = 0
+        else:
+            self.configFileChooser.set_sensitive(False)
+            self.defaultConfig = 1
+            
     def on_regionsToAvoid_toggled(self, checkButton):
         if checkButton.get_active() is True:
+            self.rtaActive = 1
             self.regionsToAvoidFileButton.set_sensitive(True)
         else:
             self.regionsToAvoidFileButton.set_sensitive(False)
+            self.rtaActive = 0
             
     def on_regionsOfInterest_toggled(self, checkButton):
         if checkButton.get_active() is True:
             self.regionsOfInterest.set_sensitive(True)
+            self.roiActive = 1
         else:
             self.regionsOfInterest.set_sensitive(False)
+            self.roiActive = 0
     
     def on_runTypeShow_clicked(self, widget):
         self.runTypeSelect.show()
@@ -370,11 +457,14 @@ class MSInterface:
     def on_main_help_clicked(self, widget):
         self.aboutdialog1.show()
         
+    def on_configFile_set(self, widget):
+        self.configFilePath = widget.get_filename()
+        
     def on_executeMS_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
+        configFile = open(self.configFilePath, "r") #change to ../../MapSplice.cfg
         configFileList = configFile.readlines()
         configFile.close()
-        self.configFileRead = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
+        self.configFileRead = open(self.configFilePath, "r") #change to ../../MapSplice.cfg
         var = "first_run = "
         var2 = "envPath = "
         
@@ -394,16 +484,20 @@ class MSInterface:
                             configFilePath = item2[10:].rstrip()
                             configFilePath = os.path.split(configFilePath)[0]
                             configFilePath = os.path.split(configFilePath)[0]
-                            os.system("python " + item3 + " " + "../MapSplice.cfg")
+                            if self.defaultConfig is 1:
+                                os.system("python " + item3 + " " + configFilePath + self.configFilePath)
+                            else:
+                                os.system("python " + item3 + " " + self.configFilePath)
+                            print "running"
                         else:
                             self.configFileRead.close()
                             self.envPathInput.show()
 
     def on_envPathSet_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
+        configFile = open(self.configFilePath, "r")
         configFileList = configFile.readlines()
         configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w") #change to ../../MapSplice.cfg
+        self.configFileWrite = open(self.configFilePath, "w")
         var = "envPath"
         var2 = "first_run"
         
@@ -424,7 +518,7 @@ class MSInterface:
             #os.putenv("PATH",os.getenv("PATH") + ":" +self.FileChooserDialog3.get_filename() + "/")
             self.gettingStarted.show()
             configFilePath = self.FileChooserDialog3.get_filename()
-            os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + "/../MapSplice.cfg")
+            os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + self.configFilePath)
         else:
             self.envPathInput.show()
         
@@ -450,6 +544,16 @@ class MSInterface:
         greatgreatgreatgrandparent = greatgreatgrandparent.get_parent()
         greatgreatgreatgrandparent.hide()
         
+    def on_io_ok_clicked(self, widget):
+        self.io_ok_clicked = 1
+        self.update_config_file()
+        parent = widget.get_parent()
+        grandparent = parent.get_parent()
+        greatgrandparent = grandparent.get_parent()
+        greatgreatgrandparent = greatgrandparent.get_parent()
+        greatgreatgreatgrandparent = greatgreatgrandparent.get_parent()
+        greatgreatgreatgrandparent.hide()
+        
     def on_basicOptionsButton_clicked(self, widget):
         self.basicOptionsWindow.show()
         
@@ -457,6 +561,14 @@ class MSInterface:
         self.advancedOptionsWindow.show()
         
     def on_doneButton_clicked(self, widget):
+        parent = widget.get_parent()
+        grandparent = parent.get_parent()
+        greatgrandparent = grandparent.get_parent()
+        greatgreatgrandparent = greatgrandparent.get_parent()
+        greatgreatgrandparent.hide()
+        
+    def on_adv_ok_clicked(self, widget):
+        self.update_config_file()
         parent = widget.get_parent()
         grandparent = parent.get_parent()
         greatgrandparent = grandparent.get_parent()
@@ -479,10 +591,15 @@ class MSInterface:
         greatgreatGrandParent.hide()
         
     def on_selectFileButton_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w") #change to .. / ../MapSplice.cfg
+        
+        self.file = self.FileChooserDialog.get_filename()
+        if self.fileCount is 1:
+            self.reads = self.reads + self.file
+        else:
+            self.reads = self.reads + "," + self.file #newline is added in update config file
+        self.readsAdded = 1
+        
+        #editing list box
         if self.fileCount == 1 and self.paired == 1:
             self.file = self.FileChooserDialog.get_filename()
             self.fileCountStr = str(self.fileCount)
@@ -519,15 +636,7 @@ class MSInterface:
             self.iter = self.treestore.insert(self.row, (None, self.fileCountStr, os.path.basename(self.FileChooserDialog.get_filename())))
             self.iterPath = self.treestore.get_path(self.iter)
             self.row = self.row + 1
-            
-        var = "reads_file ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "reads_file = " + self.file + "\n"
-            self.configFileWrite.write(item)
-         
-        self.configFileWrite.close() 
+
         self.fileSelectWindow.hide()
         
     def on_removeRead_clicked(self, widget):
@@ -546,69 +655,27 @@ class MSInterface:
         self.fileSelectWindow.show()
         
     def on_resetReadLabel_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w") #change to .. / ../MapSplice.cfg
-        var = "reads_file = "
-        for item in configFileList:
-            if var in item:
-                item = "reads_file = \n"
-            self.configFileWrite.write(item)
-        self.configFileWrite.close()
         self.row = 0
         if self.setLabelAdded != 1 and self.paired != 0:
             self.treeview.append_column(self.set)
         self.fileCount = 1
+        self.readsAdded = 0
         self.treestore.clear()
         
-    def on_regionsToAvoidFileButton_file_set(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w") #change to ../../MapSplice.cfg
-        var = "#avoid_regions ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "#avoid_regions = " + widget.get_filename() + "\n"
-            self.configFileWrite.write(item)
-        self.configFileWrite.close()
         
     def on_outputPathFileButton_file_set(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w") #change to ../../MapSplice.cfg
-        var = "output_dir ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "output_dir = " + widget.get_filename() + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+        self.outputPathAdded = 1
+
         
     def on_bibButton_clicked(self, widget):
         self.BowtieIndexSelect.show()
         
     def on_index_select_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r") #change to ../../MapSplice.cfg
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w") #change to ../../MapSplice.cfg
-        var = "Bowtieidx"
-        
-        for item in configFileList:
-            if var in item:
-                fileName = self.FileChooserDialog1.get_filename()
-                suffix = ".1.ebwt"
-                fileName = fileName[:-len(suffix)]
-                self.bowtieBasename.set_markup("<i>" + os.path.basename(fileName) + "</i>")
-                item = "Bowtieidx = " + fileName + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+        fileName = self.FileChooserDialog1.get_filename()
+        suffix = ".1.ebwt"
+        self.basename = fileName[:-len(suffix)]
+        self.bowtieBasename.set_markup("<i>" + os.path.basename(self.basename) + "</i>")
+        self.basenameSet = 1
         self.BowtieIndexSelect.hide()
         
     def on_bowtieFolderSelect_clicked(self, widget):
@@ -616,96 +683,22 @@ class MSInterface:
         
 
     def on_bowtieFolderButton_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
+        self.basenameSetWindow.show()
+        
+    def on_basenameSetButton_clicked(self, widget):
+        self.basenameSet = 1
         dir = os.path.abspath(os.curdir)
         dir = os.path.split(dir)[0].rstrip() + "/BowtieIndexFiles"
         if not os.path.exists(dir):
             os.makedirs(dir)
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "Bowtieidx"
-        
-        for item in configFileList:
-            if var in item:
-                item = "Bowtieidx = " + dir
-                self.item = item
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        self.basenameSetWindow.show()
-        
-    def on_basenameSetButton_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "Bowtieidx"
-        
-        for item in configFileList:
-            if var in item:
-                item = self.item + "/" + self.basenameLabel.get_text() + "\n\n"
-            self.configFileWrite.write(item)
-       
+        self.basename = dir + "/" + self.basenameLabel.get_text()
         self.bowtieBasename.set_markup("<i>" + self.basenameLabel.get_text() + "</i>")       
-        self.configFileWrite.close()
         self.basenameSetWindow.hide()
-         
-    def on_ROA_file_set(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "#interested_regions ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "interested = " + widget.get_filename() + "\n"
-            self.configFileWrite.write(item)
-        self.configFileWrite.close()
         
     def on_CFD_selection_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "chromosome_files_dir ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "chromosome_files_dir = " + widget.get_filename() + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+        self.refGenomeAdded = 1
         
 #Basic Options
-    def on_fastaButton_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "reads_format ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "reads_format = " + "FASTA\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_fastqButton_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "reads_format ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "reads_format = " + "FASTQ\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
         
     def on_singleButton_clicked(self, widget):
         
@@ -717,18 +710,6 @@ class MSInterface:
         #self.treeview.remove_column(self.treeview.get_column(3))
         self.fileCount = 1
         self.paired = 0
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "paired_end ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "paired_end = " + "no\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
         
     def on_pairedendButton_clicked(self, widget):
         if self.setLabelAdded != 1:
@@ -738,32 +719,9 @@ class MSInterface:
         self.setLabelAdded = 1;
         self.fileCount = 1
         self.paired = 1
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "paired_end ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "paired_end = " + "yes\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
         
     def on_RL_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "read_length ="
-        read_len = str(self.read_length.get_value_as_int())
-        
-        for item in configFileList:
-            if var in item:
-                item = "read_length = " + read_len + "\n"
-            self.configFileWrite.write(item)
-        self.configFileWrite.close()    
+        read_len = str(self.read_length.get_value_as_int()) 
             
         self.read_len = int(read_len)
         seg_length = self.read_len / 2
@@ -772,17 +730,6 @@ class MSInterface:
         self.min_output_seg.set_range(1, min_output_seg_max)
 
     def on_SL_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "segment_length ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "segment_length = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-        self.configFileWrite.close()
         
         min_output_seg_max = self.read_len / widget.get_value_as_int()
         self.min_output_seg.set_range(1, min_output_seg_max)
@@ -813,301 +760,304 @@ class MSInterface:
             exit();
  
 #Advanced Options
-    def on_canon_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "junction_type ="
+    #===========================================================================
+    # def on_canon_clicked(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "junction_type ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "junction_type = " + "canonical\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #===========================================================================
         
-        for item in configFileList:
-            if var in item:
-                item = "junction_type = " + "canonical\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+    #===========================================================================
+    # def on_noncanon_clicked(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "junction_type ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "junction_type = " + "non-canonical\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #===========================================================================
         
-    def on_noncanon_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "junction_type ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "junction_type = " + "non-canonical\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_semicanon_clicked(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "junction_type ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "junction_type = " + "semi-canonical\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+    #===========================================================================
+    # def on_semicanon_clicked(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "junction_type ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "junction_type = " + "semi-canonical\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #===========================================================================
         
     def on_remap_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "full_running = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "full_running = " + "yes\n"
-                else:
-                    item = "full_running = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
+
+        button = self.builder.get_object("remap_mismatches")
+        if widget.get_active():
+            button.set_sensitive(True)
+        else:
+            button.set_sensitive(False)
         
-    def on_deletetemp_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "remove_temp_files = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "remove_temp_files = " + "yes\n"
-                else:
-                    item = "remove_temp_files = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
+    #===========================================================================
+    # def on_deletetemp_toggled(self, widget):
+    #            if widget.get_active():
+    #                item = "remove_temp_files = " + "yes\n"
+    #            else:
+    #                item = "remove_temp_files = " + "no\n"
+    #        self.configFileWrite.write(item)
+    #       
+    #    self.configFileWrite.close()
+    #===========================================================================
         
-    def on_sec_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "search_whole_chromosome = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "search_whole_chromosome = " + "yes\n"
-                else:
-                    item = "search_whole_chromosome = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
+    #===========================================================================
+    # def on_sec_toggled(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "search_whole_chromosome = "
+    #    for item in configFileList:
+    #        if var in item:
+    #            if widget.get_active():
+    #                item = "search_whole_chromosome = " + "yes\n"
+    #            else:
+    #                item = "search_whole_chromosome = " + "no\n"
+    #        self.configFileWrite.write(item)
+    #       
+    #    self.configFileWrite.close()
+    #===========================================================================
         
-    def on_msd_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "map_segment_directly = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "map_segment_directly = " + "yes\n"
-                else:
-                    item = "map_segment_directly = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
+    #===========================================================================
+    # def on_msd_toggled(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "map_segment_directly = "
+    #    for item in configFileList:
+    #        if var in item:
+    #            if widget.get_active():
+    #                item = "map_segment_directly = " + "yes\n"
+    #            else:
+    #                item = "map_segment_directly = " + "no\n"
+    #        self.configFileWrite.write(item)
+    #       
+    #    self.configFileWrite.close()
+    #===========================================================================
         
-    def on_mapper_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "run_MapPER = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "run_MapPER = " + "yes\n"
-                else:
-                    item = "run_MapPER = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
-        
-    def on_ofj_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "do_fusion = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "do_fusion = " + "yes\n"
-                else:
-                    item = "do_fusion = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
-        
-    def on_gcr_toggled(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "#do_cluster = "
-        for item in configFileList:
-            if var in item:
-                if widget.get_active():
-                    item = "#do_cluster = " + "yes\n"
-                else:
-                    item = "#do_cluster = " + "no\n"
-            self.configFileWrite.write(item)
-           
-        self.configFileWrite.close()
-    
-    def on_anchor_length_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "anchor_length ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "anchor_length = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-    
-    def on_segment_mismatches_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "segment_mismatches ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "segment_mismatches = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-    
-    def on_splice_mismatches_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "splice_mismatches ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "splice_mismatches = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_remap_mismatches_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "remap_mismatches ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "remap_mismatches = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_max_hits_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "max_hits ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "max_hits = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_min_output_seg_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "min_output_seg ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "min_output_seg = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_max_insert_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "max_insert ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "max_insert = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        
-    def on_min_intron_length_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "min_intron_length ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "min_intron_length = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+    #===========================================================================
+    # def on_mapper_toggled(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "run_MapPER = "
+    #    for item in configFileList:
+    #        if var in item:
+    #            if widget.get_active():
+    #                item = "run_MapPER = " + "yes\n"
+    #            else:
+    #                item = "run_MapPER = " + "no\n"
+    #        self.configFileWrite.write(item)
+    #       
+    #    self.configFileWrite.close()
+    #    
+    # def on_ofj_toggled(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "do_fusion = "
+    #    for item in configFileList:
+    #        if var in item:
+    #            if widget.get_active():
+    #                item = "do_fusion = " + "yes\n"
+    #            else:
+    #                item = "do_fusion = " + "no\n"
+    #        self.configFileWrite.write(item)
+    #       
+    #    self.configFileWrite.close()
+    #    
+    # def on_gcr_toggled(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "#do_cluster = "
+    #    for item in configFileList:
+    #        if var in item:
+    #            if widget.get_active():
+    #                item = "#do_cluster = " + "yes\n"
+    #            else:
+    #                item = "#do_cluster = " + "no\n"
+    #        self.configFileWrite.write(item)
+    #       
+    #    self.configFileWrite.close()
+    # 
+    # def on_anchor_length_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "anchor_length ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "anchor_length = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    # 
+    # def on_segment_mismatches_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "segment_mismatches ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "segment_mismatches = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    # 
+    # def on_splice_mismatches_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "splice_mismatches ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "splice_mismatches = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #    
+    # def on_remap_mismatches_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "remap_mismatches ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "remap_mismatches = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #    
+    # def on_max_hits_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "max_hits ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "max_hits = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #    
+    # def on_min_output_seg_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "min_output_seg ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "min_output_seg = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #    
+    # def on_max_insert_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "max_insert ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "max_insert = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #    
+    # def on_min_intron_length_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "min_intron_length ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "min_intron_length = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #===========================================================================
         
     def on_max_intron_length_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "max_intron_length ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "max_intron_length = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
-        #self.min_intron_length.set_value(widget.get_value_as_int())
+       #========================================================================
+       # configFile = open("../MapSplice.cfg", "r")
+       # configFileList = configFile.readlines()
+       # configFile.close()
+       # self.configFileWrite = open("../MapSplice.cfg", "w")
+       # var = "max_intron_length ="
+       # 
+       # for item in configFileList:
+       #     if var in item:
+       #         item = "max_intron_length = " + str(widget.get_value_as_int()) + "\n"
+       #     self.configFileWrite.write(item)
+       # 
+       # self.configFileWrite.close()
+        self.min_intron_length.set_value(widget.get_value_as_int())
+
         self.min_intron_length.set_range(1, widget.get_value_as_int())
-        
-    def on_threads_value_changed(self, widget):
-        configFile = open("../MapSplice.cfg", "r")
-        configFileList = configFile.readlines()
-        configFile.close()
-        self.configFileWrite = open("../MapSplice.cfg", "w")
-        var = "threads ="
-        
-        for item in configFileList:
-            if var in item:
-                item = "threads = " + str(widget.get_value_as_int()) + "\n"
-            self.configFileWrite.write(item)
-       
-        self.configFileWrite.close()
+    #===========================================================================
+    #    
+    # def on_threads_value_changed(self, widget):
+    #    configFile = open("../MapSplice.cfg", "r")
+    #    configFileList = configFile.readlines()
+    #    configFile.close()
+    #    self.configFileWrite = open("../MapSplice.cfg", "w")
+    #    var = "threads ="
+    #    
+    #    for item in configFileList:
+    #        if var in item:
+    #            item = "threads = " + str(widget.get_value_as_int()) + "\n"
+    #        self.configFileWrite.write(item)
+    #   
+    #    self.configFileWrite.close()
+    #===========================================================================
        
 # Help Boxes   
     def on_helpCloseButton_clicked(self, widget):
@@ -1288,5 +1238,5 @@ if __name__ == "__main__":
     configInterface = MSInterface()
     configInterface.gettingStarted.show()
     configInterface.init_input()
-    configInterface.update_config_file()
     gtk.main()
+

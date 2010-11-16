@@ -281,14 +281,6 @@ Andrew Hefley Carpenter
     <property name="visible">True</property>
     <property name="stock">gtk-dialog-question</property>
   </object>
-  <object class="GtkImage" id="image4">
-    <property name="visible">True</property>
-    <property name="icon_name">help</property>
-  </object>
-  <object class="GtkImage" id="image5">
-    <property name="visible">True</property>
-    <property name="icon_name">help</property>
-  </object>
   <object class="GtkImage" id="image15">
     <property name="visible">True</property>
     <property name="icon_name">help</property>
@@ -1029,6 +1021,7 @@ Andrew Hefley Carpenter
                                 <child>
                                   <object class="GtkSpinButton" id="remap_mismatches">
                                     <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
                                     <property name="invisible_char">●</property>
                                     <property name="width_chars">3</property>
@@ -1426,7 +1419,7 @@ Andrew Hefley Carpenter
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="checkbutton2">
+                                  <object class="GtkCheckButton" id="deleteTempCheck">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -1534,7 +1527,7 @@ Andrew Hefley Carpenter
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="checkbutton1">
+                                  <object class="GtkCheckButton" id="remapCheck">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -1592,7 +1585,7 @@ Andrew Hefley Carpenter
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="checkbutton3">
+                                  <object class="GtkCheckButton" id="searchWholeChr">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -1650,7 +1643,7 @@ Andrew Hefley Carpenter
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="checkbutton4">
+                                  <object class="GtkCheckButton" id="mapSegDirectly">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -1751,8 +1744,8 @@ Andrew Hefley Carpenter
                                   <object class="GtkLabel" id="label22">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="xpad">5</property>
-                                    <property name="label" translatable="yes">Number of Threads to Use</property>
+                                    <property name="xpad">3</property>
+                                    <property name="label" translatable="yes">Threads</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1933,161 +1926,16 @@ Andrew Hefley Carpenter
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHSeparator" id="hseparator10">
-                            <property name="visible">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">4</property>
-                          </packing>
+                          <placeholder/>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="label63">
-                            <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="xpad">6</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Additional Features&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="padding">6</property>
-                            <property name="position">5</property>
-                          </packing>
+                          <placeholder/>
                         </child>
                         <child>
-                          <object class="GtkHSeparator" id="hseparator12">
-                            <property name="visible">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">6</property>
-                          </packing>
+                          <placeholder/>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="vbox18">
-                            <property name="visible">True</property>
-                            <child>
-                              <object class="GtkHBox" id="hbox24">
-                                <property name="visible">True</property>
-                                <child>
-                                  <object class="GtkLabel" id="label25">
-                                    <property name="visible">True</property>
-                                    <property name="xalign">0</property>
-                                    <property name="xpad">5</property>
-                                    <property name="label" translatable="yes">Run MapPER</property>
-                                  </object>
-                                  <packing>
-                                    <property name="padding">12</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="label39">
-                                    <property name="visible">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkCheckButton" id="checkbutton5">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">True</property>
-                                    <signal name="toggled" handler="on_mapper_toggled" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="padding">6</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="showRunMapPERHelp">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="image">image5</property>
-                                    <signal name="clicked" handler="on_showRunMapPERHelp_clicked" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="padding">6</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkHBox" id="hbox25">
-                                <property name="visible">True</property>
-                                <child>
-                                  <object class="GtkLabel" id="label26">
-                                    <property name="visible">True</property>
-                                    <property name="xalign">0</property>
-                                    <property name="xpad">5</property>
-                                    <property name="label" translatable="yes">Output Fusion Junction</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="padding">12</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="label40">
-                                    <property name="visible">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkCheckButton" id="checkbutton6">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">True</property>
-                                    <signal name="toggled" handler="on_ofj_toggled" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="padding">6</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="showOutputFusionJunctionHelp">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="image">image4</property>
-                                    <signal name="clicked" handler="on_showOutputFusionJunctionHelp_clicked" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="padding">6</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="padding">6</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="padding">18</property>
-                            <property name="position">7</property>
-                          </packing>
+                          <placeholder/>
                         </child>
                       </object>
                       <packing>
@@ -2163,7 +2011,7 @@ Andrew Hefley Carpenter
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_doneButton_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_adv_ok_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2413,7 +2261,7 @@ Andrew Hefley Carpenter
                                         <property name="group">pairedButton</property>
                                         <signal name="clicked" handler="on_singleButton_clicked" swapped="no"/>
                                         <child>
-                                          <object class="GtkLabel" id="label32">
+                                          <object class="GtkLabel" id="singleRead">
                                             <property name="visible">True</property>
                                             <property name="label" translatable="yes">single</property>
                                             <property name="use_markup">True</property>
@@ -2522,7 +2370,6 @@ Andrew Hefley Carpenter
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">fastqButton</property>
-                                        <signal name="clicked" handler="on_fastaButton_clicked" swapped="no"/>
                                         <child>
                                           <object class="GtkLabel" id="label54">
                                             <property name="visible">True</property>
@@ -2544,7 +2391,6 @@ Andrew Hefley Carpenter
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">fastaButton</property>
-                                        <signal name="clicked" handler="on_fastqButton_clicked" swapped="no"/>
                                         <child>
                                           <object class="GtkLabel" id="label55">
                                             <property name="visible">True</property>
@@ -2667,9 +2513,9 @@ Andrew Hefley Carpenter
                         <property name="visible">True</property>
                         <property name="orientation">vertical</property>
                         <property name="homogeneous">True</property>
-                        <property name="create_folders">False</property>
-                        <property name="action">select-folder</property>
                         <property name="filter">gffFilter</property>
+                        <property name="action">select-folder</property>
+                        <property name="create_folders">False</property>
                         <property name="width_chars">0</property>
                         <signal name="selection-changed" handler="on_CFD_selection_changed" swapped="no"/>
                       </object>
@@ -2748,11 +2594,9 @@ Andrew Hefley Carpenter
                           <object class="GtkFileChooserButton" id="regionsToAvoidFileButton">
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
-                            <property name="create_folders">False</property>
                             <property name="filter">gffFilter</property>
+                            <property name="create_folders">False</property>
                             <property name="width_chars">30</property>
-                            <signal name="file-set" handler="on_regionsToAvoidFileButton_file_set" swapped="no"/>
-                            <signal name="file-activated" handler="on_regionsToAvoidFileButton_file_set" swapped="no"/>
                           </object>
                           <packing>
                             <property name="padding">6</property>
@@ -2823,11 +2667,9 @@ Andrew Hefley Carpenter
                           <object class="GtkFileChooserButton" id="regionsOfInterest">
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
-                            <property name="create_folders">False</property>
                             <property name="filter">gffFilter</property>
+                            <property name="create_folders">False</property>
                             <property name="width_chars">30</property>
-                            <signal name="file-set" handler="on_ROA_file_set" swapped="no"/>
-                            <signal name="file-activated" handler="on_ROA_file_set" swapped="no"/>
                           </object>
                           <packing>
                             <property name="padding">6</property>
@@ -3053,11 +2895,11 @@ Andrew Hefley Carpenter
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFileChooserButton" id="filechooserbutton4">
+                      <object class="GtkFileChooserButton" id="outputPath">
                         <property name="visible">True</property>
-                        <property name="create_folders">False</property>
-                        <property name="action">select-folder</property>
                         <property name="do_overwrite_confirmation">True</property>
+                        <property name="action">select-folder</property>
+                        <property name="create_folders">False</property>
                         <property name="width_chars">20</property>
                         <signal name="selection-changed" handler="on_outputPathFileButton_file_set" swapped="no"/>
                       </object>
@@ -3148,7 +2990,7 @@ Andrew Hefley Carpenter
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="clicked" handler="on_cancelIO_clicked" swapped="no"/>
+                        <signal name="clicked" handler="on_io_ok_clicked" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4652,19 +4494,47 @@ read_base_name/1 and read_base_name/2 for the two ends*
   </object>
   <object class="GtkWindow" id="runTypeSelect">
     <property name="title" translatable="yes">MapSplice: Select Run Type</property>
+    <property name="icon">splashScreen.png</property>
     <signal name="key-press-event" handler="key_press_event_runType" swapped="no"/>
     <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
     <child>
       <object class="GtkVBox" id="vbox9">
         <property name="visible">True</property>
         <child>
-          <object class="GtkLabel" id="label34">
+          <object class="GtkVBox" id="vbox12">
             <property name="visible">True</property>
-            <property name="yalign">0</property>
+            <child>
+              <object class="GtkHBox" id="hbox24">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkLabel" id="label26">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="xpad">6</property>
+                    <property name="label" translatable="yes">&lt;b&gt;Configuration File &lt;/b&gt;</property>
+                    <property name="use_markup">True</property>
+                  </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="padding">6</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHSeparator" id="hseparator3">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -4678,9 +4548,10 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_action_appearance">False</property>
+                <property name="xalign">0.4699999988079071</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
-                <property name="group">loadFromConfigFile</property>
+                <property name="group">loadFromConfigFileButton</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4689,8 +4560,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
               </packing>
             </child>
             <child>
-              <object class="GtkRadioButton" id="loadFromConfigFile">
-                <property name="label" translatable="yes">Load Config File</property>
+              <object class="GtkRadioButton" id="loadFromConfigFileButton">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -4698,6 +4568,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">defaultRun</property>
+                <signal name="toggled" handler="on_loadConfig_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4705,9 +4576,11 @@ read_base_name/1 and read_base_name/2 for the two ends*
               </packing>
             </child>
             <child>
-              <object class="GtkFileChooserButton" id="filechooserbutton1">
+              <object class="GtkFileChooserButton" id="configFileChooser">
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="filter">configFilter</property>
+                <signal name="file-set" handler="on_configFile_set" swapped="no"/>
               </object>
               <packing>
                 <property name="padding">6</property>
@@ -4717,13 +4590,50 @@ read_base_name/1 and read_base_name/2 for the two ends*
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="padding">6</property>
+            <property name="padding">18</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator1">
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label25">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">&lt;b&gt;Additional Features&lt;/b&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="padding">6</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator2">
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">4</property>
           </packing>
         </child>
         <child>
           <object class="GtkVBox" id="vbox11">
             <property name="visible">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
             <child>
               <object class="GtkHBox" id="hbox10">
                 <property name="visible">True</property>
@@ -4749,7 +4659,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton9">
+                  <object class="GtkCheckButton" id="mapPERButton">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -4778,7 +4688,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 </child>
               </object>
               <packing>
-                <property name="position">0</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -4806,7 +4716,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton10">
+                  <object class="GtkCheckButton" id="fusionCheck">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -4836,14 +4746,15 @@ read_base_name/1 and read_base_name/2 for the two ends*
               </object>
               <packing>
                 <property name="padding">6</property>
-                <property name="position">1</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">2</property>
+            <property name="padding">18</property>
+            <property name="position">5</property>
           </packing>
         </child>
         <child>
@@ -4864,15 +4775,15 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkButton" id="button12">
-                    <property name="label">gtk-cancel</property>
+                    <property name="label">gtk-close</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
                     <signal name="clicked" handler="on_cancel_clicked" swapped="no"/>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
                     <property name="padding">3</property>
                     <property name="position">0</property>
                   </packing>
@@ -4904,8 +4815,8 @@ read_base_name/1 and read_base_name/2 for the two ends*
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="padding">18</property>
-            <property name="position">3</property>
+            <property name="padding">12</property>
+            <property name="position">6</property>
           </packing>
         </child>
       </object>
