@@ -21,7 +21,11 @@ class MSInterface:
         return True
     
     def __init__(self):
+        self.executeClicked = 0
+        self.prefOkClicked = 0
+        self.ioOkClicked = 0
         self.fileCount = 1
+        self.resetClicked = 0
         self.basenameSet = 0
         self.basename = ""
         self.reads = ""
@@ -96,6 +100,8 @@ class MSInterface:
         self.bowtieFilter.add_pattern("*.ebwt")
         self.threads = self.builder.get_object("threads")
         self.anchor_length = self.builder.get_object("anchor_length")
+        self.fusionCheck = self.builder.get_object("fusionCheck")
+        self.mapPERButton = self.builder.get_object("mapPERButton")
         self.treestore = gtk.ListStore(str, str, str)
         
        
@@ -185,50 +191,184 @@ class MSInterface:
 
 #Getting Started
     def init_input(self):
-        self.threads.set_value(1)
-        self.threads.set_range(1, 100)
         
-        self.anchor_length.set_range(6, 12)
-        self.anchor_length.set_value(8)
+        if self.executeClicked is 0:
+            configFile = open("../MapSplice.cfg", "r")
+            configFileList = configFile.readlines()
+            configFile.close()
+            self.configFileWrite = open(self.configFilePath, "w")
+            run_MapPER = "run_MapPER = "
+            do_fusion = "do_fusion = "
+            
+            for item in configFileList:
+                if do_fusion in item:
+                    item = do_fusion + "no\n"
+                
+                if run_MapPER in item:
+                    item = run_MapPER + "no\n"
+                self.configFileWrite.write(item)
+            self.mapPERButton.set_active(False)
+            self.fusionCheck.set_active(False)
+            self.configFileWrite.close()
+                    
+                    
+        if self.ioOkClicked is 0:
+            configFile = open("../MapSplice.cfg", "r")
+            configFileList = configFile.readlines()
+            configFile.close()
+            self.configFileWrite = open(self.configFilePath, "w")
+            reads_file = "reads_file = "
+            output_dir = "output_dir = "
+            chromosome_files_directory = "chromosome_files_directory = "
+            Bowtieidx = "Bowtieidx = "
+            interested_regions = "interested_regions = "
+            avoid_regions = "avoid_regions = "
+            reads_format = "reads_format = "
+            paired_end = "paired_end = "
+            read_length = "read_length = "
+            segment_length = "segment_length = "
+            run_MapPER = "run_MapPER = "
+            do_fusion = "do_fusion = "
+            
+#Defaults can be set here
+            for item in configFileList:
+                if reads_file in item:
+                    item = reads_file + "\n"
+                if output_dir in item:
+                    item = output_dir + "\n"
+                if chromosome_files_directory in item:
+                    item = chromosome_files_directory + "\n"
+                if Bowtieidx in item:
+                    item = Bowtieidx + "\n"
+                if interested_regions in item:
+                    item = interested_regions + "\n"
+                if avoid_regions in item:
+                    item = avoid_regions + "\n"
+                if reads_format in item:
+                    item = reads_format + "FASTA\n" #can be set based on reading of files
+                if paired_end in item:
+                    item = paired_end + "no\n"
+                if read_length in item:
+                    item = read_length + "36\n"
+                if segment_length in item:
+                    item = segment_length + "18\n"
+                    
+                if do_fusion in item:
+                    item = do_fusion + "no\n"
+                
+                if run_MapPER in item:
+                    item = run_MapPER + "no\n"
+                self.configFileWrite.write(item)
+            self.configFileWrite.close()
+            self.read_length.set_value(36)
+            self.read_len = 36
+            self.read_length.set_range(36, 100000000)
+            
+            self.fastaButton.set_active(True)
         
-        self.segment_mismatches.set_range(0, 3)
-        self.segment_mismatches.set_value(1)
+            self.segment_length.set_value(18)
+            self.segment_length.set_range(18, 25)
+            self.singleButton.set_active(True)
+            self.on_singleButton_clicked(self.singleButton) #so column headers update
         
-        self.splice_mismatches.set_range(0, 10)
-        self.splice_mismatches.set_value(1)
+        if self.prefOkClicked is 0:
+            configFile = open("../MapSplice.cfg", "r")
+            configFileList = configFile.readlines()
+            configFile.close()
+            self.configFileWrite = open(self.configFilePath, "w")
+            junction_type = "junction_type = "
+            full_running = "full_running = "
+            anchor_length = "anchor_length = "
+            remove_temp_files = "remove_temp_files = "
+            segment_mismatches = "segment_mismatches = "
+            splice_mismatches = "splice_mismatches = "
+            remap_mismatches = "remap_mismatches = "
+            min_intron_length = "min_intron_length = "
+            max_intron_length = "max_intron_length = "
+            threads = "threads = "
+            max_hits = "max_hits = "
+            max_insert = "max_insert = "
+            min_output_seg = "min_output_seg = "
+            search_whole_chromosome = "search_whole_chromosome = "
+            map_segment_directly = "map_segment_directly = "
+            run_MapPER = "run_MapPER = "
+            do_fusion = "do_fusion = "
+            
+            for item in configFileList:
+                
+                if do_fusion in item:
+                    item = do_fusion + "no\n"
+                
+                if run_MapPER in item:
+                    item = run_MapPER + "no\n"
+                
+                if junction_type in item:
+                    item = junction_type + "canonical\n"
+                    
+                if full_running in item:
+                    item = full_running + "\n"
+                
+                if anchor_length in item:
+                    item = anchor_length + "8\n"
+                if remove_temp_files in item:
+                    item = remove_temp_files + "no\n"
+                if segment_mismatches in item:
+                    item = segment_mismatches + "1\n"
+                if splice_mismatches in item:
+                    item = splice_mismatches + "1\n"
+                if remap_mismatches in item:
+                    item = remap_mismatches + "2\n"
+                if min_intron_length in item:
+                    item = min_intron_length + "10\n"
+                if max_intron_length in item:
+                    item = max_intron_length + "200000\n"
+                if threads in item:
+                    item = threads + "1\n"
+                if max_hits in item:
+                    item = max_hits + "4\n"
+                if max_insert in item:
+                    item = max_insert + "3\n"
+                if min_output_seg in item:
+                    item = min_output_seg + "2\n"
+                if search_whole_chromosome in item:
+                    item = search_whole_chromosome + "no\n"
+                if map_segment_directly in item:
+                    item = map_segment_directly + "no\n"
+                self.configFileWrite.write(item)
+            self.configFileWrite.close()
         
-        self.remap_mismatches.set_range(0, 3)
-        self.remap_mismatches.set_value(2)
+            self.threads.set_value(1)
+            self.threads.set_range(1, 100)
         
-        self.min_intron_length.set_range(1, 100000000)
-        self.min_intron_length.set_value(10)
+            self.anchor_length.set_range(6, 12)
+            self.anchor_length.set_value(8)
         
-        self.max_intron_length.set_range(1, 200000000) #min_intron always <= max_intron
-        self.max_intron_length.set_value(200000)
+            self.segment_mismatches.set_range(0, 3)
+            self.segment_mismatches.set_value(1)
         
-        self.read_length.set_value(36)
-        self.read_len = 36
-        self.read_length.set_range(36, 100000000)
+            self.splice_mismatches.set_range(0, 10)
+            self.splice_mismatches.set_value(1)
         
-        self.segment_length.set_value(18)
-        self.segment_length.set_range(18, 25)
+            self.remap_mismatches.set_range(0, 3)
+            self.remap_mismatches.set_value(2)
         
-        self.max_insert.set_range(0, 3)
-        self.max_insert.set_value(3)
+            self.min_intron_length.set_range(1, 100000000)
+            self.min_intron_length.set_value(10)
         
-        self.min_output_seg.set_range(1, 2)
-        self.min_output_seg.set_value(2)
+            self.max_intron_length.set_range(1, 200000000) #min_intron always <= max_intron
+            self.max_intron_length.set_value(200000)
         
-        self.max_hits.set_range(1, 100)
-        self.max_hits.set_value(4)
+            self.max_insert.set_range(0, 3)
+            self.max_insert.set_value(3)
         
-        self.canonButton.set_active(True)
+            self.min_output_seg.set_range(1, 2)
+            self.min_output_seg.set_value(2)
         
-        self.singleButton.set_active(True)
-        self.on_singleButton_clicked(self.singleButton) #so column headers update
+            self.max_hits.set_range(1, 100)
+            self.max_hits.set_value(4)
         
-        self.fastaButton.set_active(True)
-        self.defaultRunButton.set_active(True)
+            self.canonButton.set_active(True)
+            self.defaultRunButton.set_active(True)
 
     def update_config_file(self):
         configFile = open("../MapSplice.cfg", "r")
@@ -269,22 +409,30 @@ class MSInterface:
             for item in configFileList:
                 
                 if reads_file in item:
+                    if self.resetClicked is 1:
+                        item = reads_file + "\n"
                     if self.readsAdded is 1:
                         item = reads_file + self.reads + "\n"
+                    self.configFileWrite.write(item)
+                        
             
                 if chromosome_files_directory in item:
                     if self.refGenomeAdded is 1:
                         item = chromosome_files_directory + self.chrDirChooser.get_filename() + "\n"
+                    self.configFileWrite.write(item)
             
                 if Bowtieidx in item:
                     if self.basenameSet is 1:
                         item = Bowtieidx + self.basename + "\n"
+                    self.configFileWrite.write(item)
 
                 if interested_regions in item and self.regionsOfInterest.get_filename() != None and self.roiActive is 1:
                     item = interested_regions + self.regionsOfInterest.get_filename() + "\n"
+                    self.configFileWrite.write(item)
                 
                 if avoid_regions in item and self.regionsToAvoidFileButton.get_filename() != None and self.rtaActive is 1:
                     item = avoid_regions + self.regionsToAvoidFileButton.get_filename() + "\n"
+                    self.configFileWrite.write(item)
 
                 if reads_format in item:
                     button = self.builder.get_object("fastaButton")
@@ -292,6 +440,7 @@ class MSInterface:
                         item = reads_format + "FASTA\n"
                     else:
                         item = reads_format + "FASTQ\n"
+                    self.configFileWrite.write(item)
                     
                 if paired_end in item:
                     button = self.builder.get_object("singleButton")
@@ -299,22 +448,25 @@ class MSInterface:
                         item = paired_end + "no\n"
                     else:
                         item = paired_end + "yes\n"
+                    self.configFileWrite.write(item)
 
                 if read_length in item:
                     button = self.builder.get_object("read_len")
                     if read_length in item:
                         item = read_length + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if segment_length in item:
                     button = self.builder.get_object("segment_len")
                     if segment_length in item:
                         item = segment_length + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
                         
                 if output_dir in item and self.outputPathAdded is 1:
                     button = self.builder.get_object("outputPath")
                     item = output_dir + button.get_filename() + "\n"
                 self.configFileWrite.write(item)    
-                self.io_ok_clicked = 0
+                #self.io_ok_clicked = 0
         else:
             for item in configFileList:
                 if junction_type in item:
@@ -401,21 +553,23 @@ class MSInterface:
                         item = map_segment_directly + "yes\n"
                     else:
                         item = map_segment_directly + "no\n"
-
-                if run_MapPER in item:
-                    button = self.builder.get_object("mapPERButton")
-                    if button.get_active():
-                        item = run_MapPER + "yes\n"
-                    else:
-                        item = run_MapPER + "no\n"
-
-                if do_fusion in item:
-                    button = self.builder.get_object("fusionCheck")
-                    if button.get_active():
-                        item = do_fusion + "yes\n"
-                    else:
-                        item = do_fusion + "no\n"
                 self.configFileWrite.write(item)
+        for item in configFileList:
+            if run_MapPER in item:
+                button = self.builder.get_object("mapPERButton")
+                if button.get_active():
+                    item = run_MapPER + "yes\n"
+                else:
+                    item = run_MapPER + "no\n"
+
+            if do_fusion in item:
+                button = self.builder.get_object("fusionCheck")
+                if button.get_active():
+                    item = do_fusion + "yes\n"
+                else:
+                    item = do_fusion + "no\n"
+            self.configFileWrite.write(item)
+            
         self.configFileWrite.close()
   
     def on_loadConfig_toggled(self, widget):
@@ -443,6 +597,7 @@ class MSInterface:
             self.roiActive = 0
     
     def on_runTypeShow_clicked(self, widget):
+        self.init_input()
         self.runTypeSelect.show()
     
     def on_main_delete_event(self, widget, event):
@@ -461,6 +616,7 @@ class MSInterface:
         self.configFilePath = widget.get_filename()
         
     def on_executeMS_clicked(self, widget):
+        self.update_config_file()
         configFile = open(self.configFilePath, "r") #change to ../../MapSplice.cfg
         configFileList = configFile.readlines()
         configFile.close()
@@ -488,7 +644,6 @@ class MSInterface:
                                 os.system("python " + item3 + " " + configFilePath + self.configFilePath)
                             else:
                                 os.system("python " + item3 + " " + self.configFilePath)
-                            print "running"
                         else:
                             self.configFileRead.close()
                             self.envPathInput.show()
@@ -523,6 +678,8 @@ class MSInterface:
             self.envPathInput.show()
         
     def on_ioButton_clicked(self, widget):
+        if self.ioOkClicked is 0:
+            self.init_input()
         self.ioWindow.show()
         
     def on_aboutdialog_close_clicked(self, widget, response_id):
@@ -530,6 +687,7 @@ class MSInterface:
         return True
         
     def on_cancel_clicked(self, widget):
+        self.prefOkClicked = 0
         parent = widget.get_parent()
         grandparent = parent.get_parent()
         greatgrandparent = grandparent.get_parent()
@@ -537,6 +695,7 @@ class MSInterface:
         greatgreatgrandparent.hide()
         
     def on_cancelIO_clicked(self, widget):
+        self.ioOkClicked = 0
         parent = widget.get_parent()
         grandparent = parent.get_parent()
         greatgrandparent = grandparent.get_parent()
@@ -545,6 +704,7 @@ class MSInterface:
         greatgreatgreatgrandparent.hide()
         
     def on_io_ok_clicked(self, widget):
+        self.ioOkClicked = 1
         self.io_ok_clicked = 1
         self.update_config_file()
         parent = widget.get_parent()
@@ -558,6 +718,8 @@ class MSInterface:
         self.basicOptionsWindow.show()
         
     def on_advancedOptionsButton_clicked(self, widget):
+        if self.prefOkClicked is 0:
+            self.init_input()
         self.advancedOptionsWindow.show()
         
     def on_doneButton_clicked(self, widget):
@@ -568,6 +730,7 @@ class MSInterface:
         greatgreatgrandparent.hide()
         
     def on_adv_ok_clicked(self, widget):
+        self.prefOkClicked = 1
         self.update_config_file()
         parent = widget.get_parent()
         grandparent = parent.get_parent()
@@ -660,6 +823,7 @@ class MSInterface:
             self.treeview.append_column(self.set)
         self.fileCount = 1
         self.readsAdded = 0
+        self.resetClicked = 1
         self.treestore.clear()
         
         
@@ -1233,10 +1397,14 @@ class MSInterface:
     
     def on_closeGenerateClusterRegionsHelp_clicked(self, widget):
         self.GCR.hide()
+        
+    def createShortcut(self):
+        os.system("ln -f -s mapsplice_interface.py MapSplice")
+        os.system("chmod +x MapSplice")
+        os.system("gvfs-set-attribute MapSplice metadata::custom-icon " + "file://" + os.path.abspath("shortcut_ico"))
           
 if __name__ == "__main__":
     configInterface = MSInterface()
     configInterface.gettingStarted.show()
-    configInterface.init_input()
+    #configInterface.init_input()
     gtk.main()
-

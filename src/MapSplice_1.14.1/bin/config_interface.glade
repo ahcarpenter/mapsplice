@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
@@ -45,15 +45,18 @@
   </object>
   <object class="GtkMessageDialog" id="MSO">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; An option to output incomplete alignments.
-The value represents the minimal number of segments contained in an alignment.</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	An option to output incomplete alignments.
+	The value represents the minimal number of 
+	segments contained in an alignment.</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_helpCloseButton_clicked" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_helpCloseButton_clicked"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox63">
         <property name="visible">True</property>
@@ -72,7 +75,7 @@ The value represents the minimal number of segments contained in an alignment.</
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -95,14 +98,18 @@ The value represents the minimal number of segments contained in an alignment.</
   </object>
   <object class="GtkMessageDialog" id="MaxH">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; max_hits x 10 is the maximal repeated hits during segments mapping and reads mapping (default is 4 x 10 = 40)</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	max_hits x 10 is the maximal repeated hits 
+	during segments mapping and reads 
+	mapping (default is 4 x 10 = 40)</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_helpCloseButton_clicked" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_helpCloseButton_clicked"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox62">
         <property name="visible">True</property>
@@ -121,7 +128,7 @@ The value represents the minimal number of segments contained in an alignment.</
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -144,14 +151,16 @@ The value represents the minimal number of segments contained in an alignment.</
   </object>
   <object class="GtkMessageDialog" id="MSI">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; The maximal small indels length.</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The maximal small indels length.</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_helpCloseButton_clicked" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_helpCloseButton_clicked"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox61">
         <property name="visible">True</property>
@@ -170,7 +179,7 @@ The value represents the minimal number of segments contained in an alignment.</
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -235,19 +244,20 @@ The value represents the minimal number of segments contained in an alignment.</
   <object class="GtkAboutDialog" id="aboutdialog1">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">About MapSplice</property>
+    <property name="resizable">False</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <property name="program_name">MapSplice</property>
     <property name="version">1.14.1</property>
-    <property name="copyright" translatable="yes">Copyright © 2009-2010 University of Kentucky, University of North Carolina. All Rights Reserved.</property>
+    <property name="copyright" translatable="yes">Copyright &#xA9; 2009-2010 University of Kentucky, University of North Carolina. All Rights Reserved.</property>
     <property name="website">http://www.netlab.uky.edu/p/bioinfo/MapSplice</property>
     <property name="authors">Kai Wang
 Zheng Zeng
 Andrew Hefley Carpenter
 
 </property>
-    <signal name="response" handler="on_aboutdialog_close_clicked" swapped="no"/>
-    <signal name="delete-event" handler="on_aboutdialog_close_clicked" swapped="no"/>
+    <signal name="response" handler="on_aboutdialog_close_clicked"/>
+    <signal name="delete_event" handler="on_aboutdialog_close_clicked"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="aboutMS">
         <property name="visible">True</property>
@@ -331,14 +341,17 @@ Andrew Hefley Carpenter
   </object>
   <object class="GtkMessageDialog" id="DTF1">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not the remap step should be run to increase the junction coverage</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Whether or not the remap step should be run 
+	to increase the junction coverage</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox60">
         <property name="visible">True</property>
@@ -357,7 +370,7 @@ Andrew Hefley Carpenter
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -402,8 +415,8 @@ Andrew Hefley Carpenter
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox57">
         <property name="visible">True</property>
@@ -439,7 +452,7 @@ Andrew Hefley Carpenter
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="gtk_MainWindow_show" swapped="no"/>
+                <signal name="clicked" handler="gtk_MainWindow_show"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -453,7 +466,7 @@ Andrew Hefley Carpenter
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_envPathSet_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_envPathSet_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -484,8 +497,8 @@ Andrew Hefley Carpenter
     <property name="default_width">200</property>
     <property name="default_height">200</property>
     <property name="icon">splashScreen.png</property>
-    <signal name="key-press-event" handler="key_press_event_basename" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="key_press_event" handler="key_press_event_basename"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child>
       <object class="GtkVBox" id="vbox8">
         <property name="visible">True</property>
@@ -509,7 +522,7 @@ Andrew Hefley Carpenter
               <object class="GtkEntry" id="basenameLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">●</property>
+                <property name="invisible_char">&#x25CF;</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -527,7 +540,7 @@ Andrew Hefley Carpenter
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">image29</property>
-                    <signal name="clicked" handler="gtk_basenameInput_hide" swapped="no"/>
+                    <signal name="clicked" handler="gtk_basenameInput_hide"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -542,7 +555,7 @@ Andrew Hefley Carpenter
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">image30</property>
-                    <signal name="clicked" handler="on_basenameSetButton_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_basenameSetButton_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -579,8 +592,8 @@ Andrew Hefley Carpenter
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox55">
         <property name="visible">True</property>
@@ -614,7 +627,7 @@ Andrew Hefley Carpenter
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="gtk_MainWindow_show" swapped="no"/>
+                <signal name="clicked" handler="gtk_MainWindow_show"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -628,7 +641,7 @@ Andrew Hefley Carpenter
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_bowtieFolderButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_bowtieFolderButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -659,8 +672,8 @@ Andrew Hefley Carpenter
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox53">
         <property name="visible">True</property>
@@ -670,7 +683,7 @@ Andrew Hefley Carpenter
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
             <property name="filter">bowtieFilter</property>
-            <signal name="file-activated" handler="on_index_select_clicked" swapped="no"/>
+            <signal name="file_activated" handler="on_index_select_clicked"/>
           </object>
           <packing>
             <property name="position">1</property>
@@ -687,7 +700,7 @@ Andrew Hefley Carpenter
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image27</property>
-                <signal name="clicked" handler="gtk_MainWindow_show" swapped="no"/>
+                <signal name="clicked" handler="gtk_MainWindow_show"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -702,7 +715,7 @@ Andrew Hefley Carpenter
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image28</property>
-                <signal name="clicked" handler="on_index_select_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_index_select_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -804,17 +817,17 @@ Andrew Hefley Carpenter
     <property name="page_size">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment2">
+    <property name="value">25</property>
     <property name="lower">18</property>
     <property name="upper">25</property>
-    <property name="value">25</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
     <property name="page_size">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment1">
+    <property name="value">36</property>
     <property name="lower">36</property>
     <property name="upper">1000000000000</property>
-    <property name="value">36</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
     <property name="page_size">10</property>
@@ -823,8 +836,8 @@ Andrew Hefley Carpenter
     <property name="title" translatable="yes">MapSplice: Preferences</property>
     <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
-    <signal name="key-press-event" handler="key_press_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="key_press_event" handler="key_press_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child>
       <object class="GtkVBox" id="advanced_options_set">
         <property name="visible">True</property>
@@ -903,12 +916,12 @@ Andrew Hefley Carpenter
                                   <object class="GtkSpinButton" id="segment_mismatches">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment5</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_segment_mismatches_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_segment_mismatches_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -922,7 +935,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image13</property>
-                                    <signal name="clicked" handler="on_showAllowedSegmentMismatchesHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showAllowedSegmentMismatchesHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -962,12 +975,12 @@ Andrew Hefley Carpenter
                                   <object class="GtkSpinButton" id="splice_mismatches">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment6</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_splice_mismatches_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_splice_mismatches_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -981,7 +994,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image12</property>
-                                    <signal name="clicked" handler="on_showAllowedSpliceMismatchesHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showAllowedSpliceMismatchesHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1023,12 +1036,12 @@ Andrew Hefley Carpenter
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment7</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_remap_mismatches_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_remap_mismatches_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1042,7 +1055,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image11</property>
-                                    <signal name="clicked" handler="on_showAllowedRemapMismatchesHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showAllowedRemapMismatchesHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1125,12 +1138,12 @@ Andrew Hefley Carpenter
                                       <object class="GtkSpinButton" id="min_intron_length">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="invisible_char">●</property>
+                                        <property name="invisible_char">&#x25CF;</property>
                                         <property name="width_chars">3</property>
                                         <property name="shadow_type">none</property>
                                         <property name="adjustment">adjustment8</property>
                                         <property name="numeric">True</property>
-                                        <signal name="value-changed" handler="on_min_intron_length_value_changed" swapped="no"/>
+                                        <signal name="value_changed" handler="on_min_intron_length_value_changed"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1144,7 +1157,7 @@ Andrew Hefley Carpenter
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="image">image10</property>
-                                        <signal name="clicked" handler="on_showMinIntronLengthHelp_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_showMinIntronLengthHelp_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1184,13 +1197,13 @@ Andrew Hefley Carpenter
                                       <object class="GtkSpinButton" id="max_intron_length">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="invisible_char">●</property>
+                                        <property name="invisible_char">&#x25CF;</property>
                                         <property name="width_chars">6</property>
                                         <property name="xalign">0.17000000178813934</property>
                                         <property name="shadow_type">none</property>
                                         <property name="adjustment">adjustment15</property>
                                         <property name="numeric">True</property>
-                                        <signal name="value-changed" handler="on_max_intron_length_changed" swapped="no"/>
+                                        <signal name="value_changed" handler="on_max_intron_length_changed"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1204,7 +1217,7 @@ Andrew Hefley Carpenter
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="image">image9</property>
-                                        <signal name="clicked" handler="on_showMaxIntronLengthHelp_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_showMaxIntronLengthHelp_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1236,9 +1249,9 @@ Andrew Hefley Carpenter
                                       <object class="GtkSpinButton" id="max_insert">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="invisible_char">●</property>
+                                        <property name="invisible_char">&#x25CF;</property>
                                         <property name="adjustment">adjustment18</property>
-                                        <signal name="value-changed" handler="on_max_insert_value_changed" swapped="no"/>
+                                        <signal name="value_changed" handler="on_max_insert_value_changed"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1252,7 +1265,7 @@ Andrew Hefley Carpenter
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="image">image32</property>
-                                        <signal name="clicked" handler="on_max_smallindel_help_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_max_smallindel_help_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1345,7 +1358,7 @@ Andrew Hefley Carpenter
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">radiobutton6</property>
-                                        <signal name="clicked" handler="on_canon_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_canon_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1361,7 +1374,7 @@ Andrew Hefley Carpenter
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">canonicalRadio</property>
-                                        <signal name="clicked" handler="on_noncanon_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_noncanon_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1382,7 +1395,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image16</property>
-                                    <signal name="clicked" handler="on_showOutputOrderingHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showOutputOrderingHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1424,7 +1437,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="draw_indicator">True</property>
-                                    <signal name="toggled" handler="on_deletetemp_toggled" swapped="no"/>
+                                    <signal name="toggled" handler="on_deletetemp_toggled"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1438,7 +1451,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image2</property>
-                                    <signal name="clicked" handler="on_showDeleteTempFilesHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showDeleteTempFilesHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1532,7 +1545,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="draw_indicator">True</property>
-                                    <signal name="toggled" handler="on_remap_toggled" swapped="no"/>
+                                    <signal name="toggled" handler="on_remap_toggled"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1547,7 +1560,7 @@ Andrew Hefley Carpenter
                                     <property name="receives_default">True</property>
                                     <property name="image">image7</property>
                                     <property name="yalign">0.68999999761581421</property>
-                                    <signal name="clicked" handler="on_showRemapHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showRemapHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1590,7 +1603,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="draw_indicator">True</property>
-                                    <signal name="toggled" handler="on_sec_toggled" swapped="no"/>
+                                    <signal name="toggled" handler="on_sec_toggled"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1604,7 +1617,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image8</property>
-                                    <signal name="clicked" handler="on_showSearchEntireChromHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showSearchEntireChromHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1648,7 +1661,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="draw_indicator">True</property>
-                                    <signal name="toggled" handler="on_msd_toggled" swapped="no"/>
+                                    <signal name="toggled" handler="on_msd_toggled"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1662,7 +1675,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image6</property>
-                                    <signal name="clicked" handler="on_showMapSegDirectlyHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showMapSegDirectlyHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1703,13 +1716,13 @@ Andrew Hefley Carpenter
                                   <object class="GtkSpinButton" id="anchor_length">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment3</property>
                                     <property name="climb_rate">1</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_anchor_length_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_anchor_length_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1723,7 +1736,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image14</property>
-                                    <signal name="clicked" handler="on_showAnchorLengthHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showAnchorLengthHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1765,12 +1778,12 @@ Andrew Hefley Carpenter
                                   <object class="GtkSpinButton" id="threads">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment10</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_threads_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_threads_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1784,7 +1797,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image15</property>
-                                    <signal name="clicked" handler="on_showThreadsHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showThreadsHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1825,12 +1838,12 @@ Andrew Hefley Carpenter
                                   <object class="GtkSpinButton" id="max_hits">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment16</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_max_hits_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_max_hits_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1844,7 +1857,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image33</property>
-                                    <signal name="clicked" handler="on_max_hits_help_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_max_hits_help_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1886,12 +1899,12 @@ Andrew Hefley Carpenter
                                   <object class="GtkSpinButton" id="min_output_seg">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
+                                    <property name="invisible_char">&#x25CF;</property>
                                     <property name="width_chars">3</property>
                                     <property name="shadow_type">none</property>
                                     <property name="adjustment">adjustment17</property>
                                     <property name="numeric">True</property>
-                                    <signal name="value-changed" handler="on_min_output_seg_value_changed" swapped="no"/>
+                                    <signal name="value_changed" handler="on_min_output_seg_value_changed"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1905,7 +1918,7 @@ Andrew Hefley Carpenter
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="image">image34</property>
-                                    <signal name="clicked" handler="on_min_output_seg_help_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_min_output_seg_help_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1996,7 +2009,7 @@ Andrew Hefley Carpenter
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_cancel_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_cancel_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2011,7 +2024,7 @@ Andrew Hefley Carpenter
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_adv_ok_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_adv_ok_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2035,12 +2048,43 @@ Andrew Hefley Carpenter
       </object>
     </child>
   </object>
+  <object class="GtkTreeStore" id="readListStore"/>
+  <object class="GtkListStore" id="readList">
+    <columns>
+      <!-- column-name column1 -->
+      <column type="gint"/>
+      <!-- column-name Set -->
+      <column type="gint"/>
+      <!-- column-name Type -->
+      <column type="gchar"/>
+      <!-- column-name Location -->
+      <column type="gchar"/>
+      <!-- column-name Hello -->
+      <column type="GtkTreeViewColumnSizing"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">1</col>
+        <col id="1">2</col>
+        <col id="2">7</col>
+        <col id="3">/</col>
+        <col id="4">grow-only</col>
+      </row>
+      <row>
+        <col id="0">2</col>
+        <col id="1">4</col>
+        <col id="2">5</col>
+        <col id="3">8</col>
+        <col id="4">grow-only</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkWindow" id="ioWindow">
     <property name="title" translatable="yes">MapSplice: Input &amp; Output</property>
     <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
-    <signal name="key-press-event" handler="key_press_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="key_press_event" handler="key_press_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child>
       <object class="GtkVBox" id="io_set">
         <property name="visible">True</property>
@@ -2113,7 +2157,6 @@ Andrew Hefley Carpenter
                         </child>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow1">
-                            <property name="width_request">300</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="hadjustment">adjustment11</property>
@@ -2131,7 +2174,7 @@ Andrew Hefley Carpenter
                                   <object class="GtkTreeView" id="treeview">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <signal name="select-cursor-row" handler="on_read_clicked" swapped="no"/>
+                                    <signal name="select_cursor_row" handler="on_read_clicked"/>
                                   </object>
                                 </child>
                               </object>
@@ -2151,7 +2194,7 @@ Andrew Hefley Carpenter
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="image">image17</property>
-                                <signal name="clicked" handler="gtk_FileSelect_show" swapped="no"/>
+                                <signal name="clicked" handler="gtk_FileSelect_show"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -2165,7 +2208,7 @@ Andrew Hefley Carpenter
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="image">image35</property>
-                                <signal name="clicked" handler="on_removeRead_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_removeRead_clicked"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -2179,7 +2222,7 @@ Andrew Hefley Carpenter
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="image">image18</property>
-                                <signal name="clicked" handler="on_resetReadLabel_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_resetReadLabel_clicked"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -2193,7 +2236,7 @@ Andrew Hefley Carpenter
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="image">image19</property>
-                                <signal name="clicked" handler="on_showReadSelectHelp_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_showReadSelectHelp_clicked"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -2259,7 +2302,7 @@ Andrew Hefley Carpenter
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">pairedButton</property>
-                                        <signal name="clicked" handler="on_singleButton_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_singleButton_clicked"/>
                                         <child>
                                           <object class="GtkLabel" id="singleRead">
                                             <property name="visible">True</property>
@@ -2281,7 +2324,7 @@ Andrew Hefley Carpenter
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="group">singleButton</property>
-                                        <signal name="clicked" handler="on_pairedendButton_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_pairedendButton_clicked"/>
                                         <child>
                                           <object class="GtkLabel" id="label53">
                                             <property name="visible">True</property>
@@ -2316,9 +2359,9 @@ Andrew Hefley Carpenter
                                           <object class="GtkSpinButton" id="segment_len">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="invisible_char">●</property>
+                                            <property name="invisible_char">&#x25CF;</property>
                                             <property name="adjustment">adjustment2</property>
-                                            <signal name="value-changed" handler="on_SL_value_changed" swapped="no"/>
+                                            <signal name="value_changed" handler="on_SL_value_changed"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2430,9 +2473,9 @@ Andrew Hefley Carpenter
                                       <object class="GtkSpinButton" id="read_len">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="invisible_char">●</property>
+                                        <property name="invisible_char">&#x25CF;</property>
                                         <property name="adjustment">adjustment19</property>
-                                        <signal name="value-changed" handler="on_RL_value_changed" swapped="no"/>
+                                        <signal name="value_changed" handler="on_RL_value_changed"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2514,10 +2557,10 @@ Andrew Hefley Carpenter
                         <property name="orientation">vertical</property>
                         <property name="homogeneous">True</property>
                         <property name="filter">gffFilter</property>
-                        <property name="action">select-folder</property>
                         <property name="create_folders">False</property>
+                        <property name="action">select-folder</property>
                         <property name="width_chars">0</property>
-                        <signal name="selection-changed" handler="on_CFD_selection_changed" swapped="no"/>
+                        <signal name="selection_changed" handler="on_CFD_selection_changed"/>
                       </object>
                       <packing>
                         <property name="padding">6</property>
@@ -2530,7 +2573,7 @@ Andrew Hefley Carpenter
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="image">image3</property>
-                        <signal name="clicked" handler="on_showChromosomeFilesDirectoryHelp_clicked" swapped="no"/>
+                        <signal name="clicked" handler="on_showChromosomeFilesDirectoryHelp_clicked"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -2556,10 +2599,9 @@ Andrew Hefley Carpenter
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_stock">True</property>
                             <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="on_regionsToAvoid_toggled" swapped="no"/>
+                            <signal name="toggled" handler="on_regionsToAvoid_toggled"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2609,7 +2651,7 @@ Andrew Hefley Carpenter
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="image">image24</property>
-                            <signal name="clicked" handler="on_showRegionsToAvoidHelp_clicked" swapped="no"/>
+                            <signal name="clicked" handler="on_showRegionsToAvoidHelp_clicked"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2632,9 +2674,8 @@ Andrew Hefley Carpenter
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="on_regionsOfInterest_toggled" swapped="no"/>
+                            <signal name="toggled" handler="on_regionsOfInterest_toggled"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2682,7 +2723,7 @@ Andrew Hefley Carpenter
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="image">image25</property>
-                            <signal name="clicked" handler="on_showRegionsOfInterestHelp_clicked" swapped="no"/>
+                            <signal name="clicked" handler="on_showRegionsOfInterestHelp_clicked"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2769,7 +2810,7 @@ Andrew Hefley Carpenter
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="image">image31</property>
-                                        <signal name="clicked" handler="on_bibButton_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_bibButton_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="position">0</property>
@@ -2782,7 +2823,7 @@ Andrew Hefley Carpenter
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="image">image26</property>
-                                        <signal name="clicked" handler="on_bowtieFolderButton_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_bowtieFolderButton_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="padding">6</property>
@@ -2804,7 +2845,7 @@ Andrew Hefley Carpenter
                                     <property name="receives_default">True</property>
                                     <property name="image">image23</property>
                                     <property name="image_position">top</property>
-                                    <signal name="clicked" handler="on_showBowtieIndexBasenameHelp_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_showBowtieIndexBasenameHelp_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -2897,11 +2938,11 @@ Andrew Hefley Carpenter
                     <child>
                       <object class="GtkFileChooserButton" id="outputPath">
                         <property name="visible">True</property>
+                        <property name="create_folders">False</property>
                         <property name="do_overwrite_confirmation">True</property>
                         <property name="action">select-folder</property>
-                        <property name="create_folders">False</property>
                         <property name="width_chars">20</property>
-                        <signal name="selection-changed" handler="on_outputPathFileButton_file_set" swapped="no"/>
+                        <signal name="selection_changed" handler="on_outputPathFileButton_file_set"/>
                       </object>
                       <packing>
                         <property name="padding">6</property>
@@ -2914,7 +2955,7 @@ Andrew Hefley Carpenter
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="image">image20</property>
-                        <signal name="clicked" handler="on_showOutputPathHelp_clicked" swapped="no"/>
+                        <signal name="clicked" handler="on_showOutputPathHelp_clicked"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -2975,7 +3016,7 @@ Andrew Hefley Carpenter
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="clicked" handler="on_cancelIO_clicked" swapped="no"/>
+                        <signal name="clicked" handler="on_cancelIO_clicked"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -2990,7 +3031,7 @@ Andrew Hefley Carpenter
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="clicked" handler="on_io_ok_clicked" swapped="no"/>
+                        <signal name="clicked" handler="on_io_ok_clicked"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3022,43 +3063,12 @@ Andrew Hefley Carpenter
       </object>
     </child>
   </object>
-  <object class="GtkTreeStore" id="readListStore"/>
-  <object class="GtkListStore" id="readList">
-    <columns>
-      <!-- column-name column1 -->
-      <column type="gint"/>
-      <!-- column-name Set -->
-      <column type="gint"/>
-      <!-- column-name Type -->
-      <column type="gchar"/>
-      <!-- column-name Location -->
-      <column type="gchar"/>
-      <!-- column-name Hello -->
-      <column type="GtkTreeViewColumnSizing"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">1</col>
-        <col id="1">2</col>
-        <col id="2">7</col>
-        <col id="3">/</col>
-        <col id="4">grow-only</col>
-      </row>
-      <row>
-        <col id="0">2</col>
-        <col id="1">4</col>
-        <col id="2">5</col>
-        <col id="3">8</col>
-        <col id="4">grow-only</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkWindow" id="gettingStarted">
     <property name="title" translatable="yes">MapSplice</property>
     <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
-    <signal name="key-press-event" handler="key_press_event_main" swapped="no"/>
-    <signal name="delete-event" handler="on_main_delete_event" swapped="no"/>
+    <signal name="key_press_event" handler="key_press_event_main"/>
+    <signal name="delete_event" handler="on_main_delete_event"/>
     <child>
       <object class="GtkVBox" id="vbox3">
         <property name="visible">True</property>
@@ -3068,10 +3078,11 @@ Andrew Hefley Carpenter
         <child>
           <object class="GtkImage" id="image1">
             <property name="visible">True</property>
-            <property name="pixbuf">splashScreen.png</property>
+            <property name="pixbuf">main.png</property>
           </object>
           <packing>
-            <property name="padding">2</property>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -3081,82 +3092,166 @@ Andrew Hefley Carpenter
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="padding">6</property>
+            <property name="padding">3</property>
             <property name="position">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkHBox" id="hbox2">
             <property name="visible">True</property>
-            <property name="homogeneous">True</property>
             <child>
-              <object class="GtkButton" id="ioButton">
-                <property name="label" translatable="yes">Input &amp; Output</property>
+              <object class="GtkLabel" id="label35">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_ioButton_clicked" swapped="no"/>
               </object>
               <packing>
-                <property name="padding">6</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="padding">2</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="advancedOptionsButton">
-                <property name="label">gtk-preferences</property>
+              <object class="GtkHBox" id="hbox25">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_advancedOptionsButton_clicked" swapped="no"/>
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkButton" id="ioButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_ioButton_clicked"/>
+                    <child>
+                      <object class="GtkHBox" id="hbox32">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkImage" id="image5">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-file</property>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label32">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Input</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkVSeparator" id="vseparator1">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="padding">3</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="image38">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-print</property>
+                          </object>
+                          <packing>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label34">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Output</property>
+                          </object>
+                          <packing>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="padding">3</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="advancedOptionsButton">
+                    <property name="label">gtk-preferences</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_stock">True</property>
+                    <signal name="clicked" handler="on_advancedOptionsButton_clicked"/>
+                  </object>
+                  <packing>
+                    <property name="padding">3</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="padding">6</property>
                 <property name="position">1</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button9">
-                <property name="label">gtk-about</property>
+              <object class="GtkHBox" id="hbox35">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_main_help_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkButton" id="executeMS">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="image">image40</property>
+                    <signal name="clicked" handler="on_runTypeShow_clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">3</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button9">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="image">image39</property>
+                    <signal name="clicked" handler="on_main_help_clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">3</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="padding">6</property>
+                <property name="expand">False</property>
                 <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label39">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="padding">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkHBox" id="hbox35">
-            <property name="visible">True</property>
-            <child>
-              <object class="GtkButton" id="executeMS">
-                <property name="label">gtk-execute</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_runTypeShow_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="padding">6</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
+            <property name="fill">False</property>
             <property name="padding">6</property>
-            <property name="position">4</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
@@ -3167,7 +3262,7 @@ Andrew Hefley Carpenter
     <property name="default_width">400</property>
     <property name="default_height">278</property>
     <property name="type_hint">splashscreen</property>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child>
       <object class="GtkImage" id="splashImage">
         <property name="visible">True</property>
@@ -3179,18 +3274,16 @@ Andrew Hefley Carpenter
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Help</property>
     <property name="resizable">False</property>
-    <property name="modal">True</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; File specifying regions to avoid while searching for alignments
-
-&lt;b&gt;Required File Format:&lt;/b&gt; *.gff</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	A *.gff file specifying regions to avoid while 
+	searching for alignments</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">&lt;b&gt;Assignment Statment:&lt;/b&gt;&lt;i&gt; avoid_regions = avoid_regions.gff&lt;/i&gt;</property>
-    <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox26">
         <property name="visible">True</property>
@@ -3209,7 +3302,7 @@ Andrew Hefley Carpenter
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3232,14 +3325,17 @@ Andrew Hefley Carpenter
   </object>
   <object class="GtkMessageDialog" id="OP">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the name of the directory in which MapSplice will write its output</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt;
+	The name of the directory in which 
+	MapSplice will write its output</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox25">
         <property name="visible">True</property>
@@ -3258,7 +3354,7 @@ Andrew Hefley Carpenter
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3281,17 +3377,20 @@ Andrew Hefley Carpenter
   </object>
   <object class="GtkMessageDialog" id="BIB">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the base name of the index to be searched by Bowtie.*</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Sets the base name of the index to be 
+	searched by Bowtie.*</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">*&lt;i&gt;If the index does not exist, it will be built from reference genomes
-indicated by option -c with bowtie-build.&lt;/i&gt;</property>
+    <property name="secondary_text" translatable="yes">*&lt;i&gt;If the index does not exist, it will be 
+	built from reference genomes&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox24">
         <property name="visible">True</property>
@@ -3310,7 +3409,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3333,16 +3432,17 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="ROI">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; An optional file containing specific regions to be searched during the alignment phase.</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	A *.gff file containing specific regions to be 
+	searched during the alignment phase.</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">&lt;b&gt;Supported Format:&lt;/b&gt; *.gff</property>
-    <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox23">
         <property name="visible">True</property>
@@ -3361,7 +3461,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3384,16 +3484,26 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="CFD">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; The directory containing the sequence files of the reference genome in FASTA format</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The directory containing the sequence files of the 
+	reference genome in FASTA format</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">&lt;b&gt;Formatting Requirements:&lt;/b&gt; One chromosome per file. The chromosome name after '&gt;' should not contain tab or blank space. The chromosome name should be the same of basename of chromosome file. Suffix of chromosome file name should be 'fa'. For example if chromosome name after '&gt;' is 'chr1', then the file name should be 'chr1.fa'.</property>
+    <property name="secondary_text" translatable="yes">&lt;b&gt;Formatting Requirements&lt;/b&gt; 
+	One chromosome per file. The chromosome name 
+	after '&gt;' should not contain any tabs or blank space. 
+	The chromosome name should be the same as the
+	basename of the chromosome file. 
+	The suffix of the chromosome file name should be 'fa'. 
+	For example if the chromosome name after '&gt;' is 
+	'chr1', then the file name should be 'chr1.fa'.</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox22">
         <property name="visible">True</property>
@@ -3412,7 +3522,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3435,17 +3545,18 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="IRF">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="message_type">question</property>
     <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the format of the input reads* 
 &lt;b&gt;Supported Formats:&lt;/b&gt; {FASTA,FASTQ}</property>
     <property name="use_markup">True</property>
     <property name="secondary_text" translatable="yes">*&lt;i&gt;Reads names after '&gt;' or '@' should not contain blank spaces or tabs&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox21">
         <property name="visible">True</property>
@@ -3464,7 +3575,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3487,14 +3598,14 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="RT">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not the input reads are paired end reads or single reads</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox20">
         <property name="visible">True</property>
@@ -3513,7 +3624,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3536,7 +3647,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="RL">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
@@ -3544,8 +3655,8 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
     <property name="use_markup">True</property>
     <property name="secondary_text" translatable="yes">*&lt;i&gt;The read length can be as as short as 36bp, or arbitrary long&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox19">
         <property name="visible">True</property>
@@ -3564,7 +3675,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3587,7 +3698,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="SL">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
@@ -3595,8 +3706,8 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
     <property name="use_markup">True</property>
     <property name="secondary_text" translatable="yes">*&lt;i&gt;This value is suggested to be in range of [18,25], if the segement length value is too short, the segment will be mapped everywhere. In addition, the segment length should not be longer than half of the read length.&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox18">
         <property name="visible">True</property>
@@ -3615,7 +3726,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3638,20 +3749,18 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="OO">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not to output semi-canonical* and non-canonical** junctions</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Whether or not to output canonical* 
+	or non-canonical** junctions</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">&lt;i&gt;canonical: If selected MapSplice will output canonical junctions.
-
-*semi-canonical: If selected MapSplice will output semi-canonical and canonical junctions.
-
-**non-canonical: If selected MapSplice will output all junctions including non-canonical, semi-canonical and canonical junctions.&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox17">
         <property name="visible">True</property>
@@ -3670,7 +3779,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3693,14 +3802,18 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="DTF">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not temp files should be deleted after execution halts to save disk space.</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Whether or not temporary files should 
+	be deleted after execution halts to save 
+	disk space.</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox15">
         <property name="visible">True</property>
@@ -3719,7 +3832,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3742,16 +3855,19 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="AL">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the anchor length used for a single anchored spliced alignment*</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The anchor length used for a single anchored 
+	spliced alignment*</property>
     <property name="use_markup">True</property>
     <property name="secondary_text" translatable="yes">*&lt;i&gt;Decreasing this value will find more alignments and use more running time&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox14">
         <property name="visible">True</property>
@@ -3770,7 +3886,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3793,14 +3909,17 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="ASegM">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the number of mismatches allowed during segment mapping</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The number of mismatches allowed during segment 
+	mapping</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox13">
         <property name="visible">True</property>
@@ -3819,7 +3938,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3842,14 +3961,17 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="ASplM">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the number of mismatches allowed for a missed spliced segment</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The number of mismatches allowed for a missed 
+	spliced segment</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox12">
         <property name="visible">True</property>
@@ -3868,7 +3990,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3891,14 +4013,17 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="ARM">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the number of mismatches allowed during the remapping step.</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The number of mismatches allowed during the 
+	remapping step.</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox11">
         <property name="visible">True</property>
@@ -3917,7 +4042,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3940,16 +4065,17 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="MIL">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the minimum intron length.*</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The minimum intron length.</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">*&lt;i&gt;The default is 10&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox10">
         <property name="visible">True</property>
@@ -3968,7 +4094,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3991,16 +4117,17 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="MaxIL">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Sets the maximum intron length.*</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	The maximum intron length.</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">*&lt;i&gt;The default is 200,000&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox9">
         <property name="visible">True</property>
@@ -4019,7 +4146,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4042,16 +4169,18 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="TH">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Number of threads to be used during segment mapping.*</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Number of threads to be used during segment mapping.</property>
     <property name="use_markup">True</property>
     <property name="secondary_text" translatable="yes">*&lt;i&gt;Will be utilized by MapSplice in the future&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox8">
         <property name="visible">True</property>
@@ -4070,7 +4199,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4093,16 +4222,20 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="SEC">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not the entire chromosome should be searched when finding splice alignments instead of just searching exonic regions.*</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Whether or not the entire chromosome should be 
+	searched* when finding splice alignments instead of 
+	just searching exonic regions.</property>
     <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">*&lt;i&gt;Can find splice alignments in small exons (less than segment length), but the run-time will be longer&lt;/i&gt;</property>
+    <property name="secondary_text" translatable="yes">*&lt;i&gt;Able to find splice alignments in small exons (less than segment length), but the run-time will be longer&lt;/i&gt;</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox7">
         <property name="visible">True</property>
@@ -4121,7 +4254,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4144,16 +4277,24 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="MSD">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; If yes, MapSplice will try to find the spliced and unspliced alignments of a read, and subsequently selecting the 'best' alignment.* If not, MapSplice will try to find the unspliced alignments of a read, if no unspliced alignments are found, then MapSplice will try to find spliced alignments 
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	If yes, MapSplice will try to find the spliced and 
+	unspliced alignments of a read, subsequently 
+	selecting the 'best' alignment.* 
+	If not, MapSplice will try to find the unspliced 
+	alignments of a read, if no unspliced alignments are 
+	found, then MapSplice will try to find spliced 
+	alignments.
 
 *&lt;i&gt;Will use more running time&lt;/i&gt;</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox6">
         <property name="visible">True</property>
@@ -4172,7 +4313,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4195,16 +4336,20 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="RM">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not to run MapPER and generate a mapping of the reads based on a probabilistic framework.
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Whether or not to run MapPER and generate a 
+	mapping of the reads based on a probabilistic 
+	framework*
 
-&lt;b&gt;Note:&lt;/b&gt; More information concerning the probabilistic framework can be found at &lt;i&gt;bioinformatics.oxfordjournals.org/cgi/reprint/btq336v1.pdf&lt;/i&gt;</property>
+&lt;i&gt;*More information concerning the probabilistic framework can be found at bioinformatics.oxfordjournals.org/cgi/reprint/btq336v1.pdf&lt;/i&gt;</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox5">
         <property name="visible">True</property>
@@ -4226,7 +4371,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4249,18 +4394,18 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="OFJ">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not to output fusion junctions.* 
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	Whether or not to output fusion junctions.* 
 
-&lt;b&gt;Note:&lt;/b&gt; The output files are titled "fusion.junction" and "fusion_junction.unique"
-
-*&lt;i&gt;reads should be long enough to be divided into more than two segments for fusion alignment&lt;/i&gt;</property>
+&lt;i&gt;*The output files are titled "fusion.junction" and "fusion_junction.unique"&lt;/i&gt;</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox4">
         <property name="visible">True</property>
@@ -4279,7 +4424,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4302,18 +4447,19 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
   </object>
   <object class="GtkMessageDialog" id="GCR">
     <property name="border_width">5</property>
-    <property name="modal">True</property>
+    <property name="resizable">False</property>
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="message_type">question</property>
     <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; Whether or not to use paired-end reads to generate clustered regions for fusion reads mapping*
 
 &lt;b&gt;Note:&lt;/b&gt; The output files are titled "cluster.fusion.mapped" and "cluster.fusion.junction"
 
 *&lt;i&gt;Only valid for paired-end reads and full running model(set full_running = yes)&lt;/i&gt;</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">
         <property name="visible">True</property>
@@ -4332,7 +4478,7 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_helpCloseButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_helpCloseButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4353,29 +4499,34 @@ indicated by option -c with bowtie-build.&lt;/i&gt;</property>
       <action-widget response="0">helpCloseButton</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkMessageDialog" id="readSelectHelp">
+  <object class="GtkMessageDialog" id="readSelectHelpOld">
     <property name="border_width">5</property>
+    <property name="type">popup</property>
+    <property name="title" translatable="yes">asdf</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">splashScreen.png</property>
-    <property name="type_hint">normal</property>
+    <property name="type_hint">splashscreen</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="text" translatable="yes">&lt;b&gt;Description:&lt;/b&gt; A comma separated list of the RNA-seq read files. 
+    <property name="gravity">center</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	A list of RNA-seq read files. 
 
-&lt;b&gt;Input Order Requirements (for paired-end):&lt;/b&gt; The order should be as follows 
+&lt;b&gt;Formatting Requirements&lt;/b&gt;                      
+	Paired-end reads should be ordered as follows: 
 
-reads1_end1,reads1_end2,reads2_end1,read2_end2...
+      		reads1_end1,reads1_end2,reads2_end1 ...
 
-&lt;b&gt;Input Order Requirements (for two ends of the same read):&lt;/b&gt; The read names should be in the following format 
+	For two ends from the same read, the naming should 
+	be as follows:
 
-read_base_name/1 and read_base_name/2 for the two ends*
-
-*&lt;i&gt;read_base_name should be the same for two ends&lt;/i&gt;</property>
+       		read_base_name/1 and read_base_name/2</property>
     <property name="use_markup">True</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -4391,7 +4542,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_closeReadSelectHelp_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_closeReadSelectHelp_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4421,8 +4572,8 @@ read_base_name/1 and read_base_name/2 for the two ends*
     <property name="icon">splashScreen.png</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
-    <signal name="close" handler="on_widget_delete_event" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="close" handler="on_widget_delete_event"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -4432,7 +4583,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
             <property name="filter">readFilter</property>
-            <signal name="file-activated" handler="on_selectFileButton_clicked" swapped="no"/>
+            <signal name="file_activated" handler="on_selectFileButton_clicked"/>
           </object>
           <packing>
             <property name="position">1</property>
@@ -4449,7 +4600,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="gtk_MainWindow_show" swapped="no"/>
+                <signal name="clicked" handler="gtk_MainWindow_show"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4464,7 +4615,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_selectFileButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_selectFileButton_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4495,8 +4646,8 @@ read_base_name/1 and read_base_name/2 for the two ends*
   <object class="GtkWindow" id="runTypeSelect">
     <property name="title" translatable="yes">MapSplice: Select Run Type</property>
     <property name="icon">splashScreen.png</property>
-    <signal name="key-press-event" handler="key_press_event_runType" swapped="no"/>
-    <signal name="delete-event" handler="on_widget_delete_event" swapped="no"/>
+    <signal name="key_press_event" handler="key_press_event_runType"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
     <child>
       <object class="GtkVBox" id="vbox9">
         <property name="visible">True</property>
@@ -4547,7 +4698,6 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="xalign">0.4699999988079071</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
@@ -4564,11 +4714,10 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">defaultRun</property>
-                <signal name="toggled" handler="on_loadConfig_toggled" swapped="no"/>
+                <signal name="toggled" handler="on_loadConfig_toggled"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4580,7 +4729,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="filter">configFilter</property>
-                <signal name="file-set" handler="on_configFile_set" swapped="no"/>
+                <signal name="file_set" handler="on_configFile_set"/>
               </object>
               <packing>
                 <property name="padding">6</property>
@@ -4664,7 +4813,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="draw_indicator">True</property>
-                    <signal name="toggled" handler="on_mapper_toggled" swapped="no"/>
+                    <signal name="toggled" handler="on_mapper_toggled"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4678,7 +4827,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">image36</property>
-                    <signal name="clicked" handler="on_showRunMapPERHelp_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_showRunMapPERHelp_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4721,7 +4870,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="draw_indicator">True</property>
-                    <signal name="toggled" handler="on_ofj_toggled" swapped="no"/>
+                    <signal name="toggled" handler="on_ofj_toggled"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4735,7 +4884,7 @@ read_base_name/1 and read_base_name/2 for the two ends*
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">image37</property>
-                    <signal name="clicked" handler="on_showOutputFusionJunctionHelp_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_showOutputFusionJunctionHelp_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4779,9 +4928,8 @@ read_base_name/1 and read_base_name/2 for the two ends*
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_cancel_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_cancel_clicked"/>
                   </object>
                   <packing>
                     <property name="padding">3</property>
@@ -4794,9 +4942,8 @@ read_base_name/1 and read_base_name/2 for the two ends*
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_executeMS_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_executeMS_clicked"/>
                   </object>
                   <packing>
                     <property name="padding">3</property>
@@ -4817,6 +4964,116 @@ read_base_name/1 and read_base_name/2 for the two ends*
             <property name="fill">False</property>
             <property name="padding">12</property>
             <property name="position">6</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="stock">gtk-file</property>
+  </object>
+  <object class="GtkMessageDialog" id="readSelectHelp">
+    <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="icon">splashScreen.png</property>
+    <property name="type_hint">normal</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="has_separator">False</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">&lt;b&gt;Description&lt;/b&gt; 
+	A list of RNA-seq read files. 
+
+&lt;b&gt;Formatting Requirements&lt;/b&gt;                      
+	Paired-end reads should be ordered as follows: 
+
+      		&lt;i&gt;reads1_end1,reads1_end2,reads2_end1 ...&lt;/i&gt;
+
+	For two ends from the same read, the naming should 
+	be as follows:
+
+       		&lt;i&gt;read_base_name/1 and read_base_name/2&lt;/i&gt;</property>
+    <property name="use_markup">True</property>
+    <signal name="key_press_event" handler="key_press_event"/>
+    <signal name="close" handler="on_closeReadSelectHelp_clicked"/>
+    <signal name="delete_event" handler="on_widget_delete_event"/>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox73">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area73">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkButton" id="closeReadSelectHelp1">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_closeReadSelectHelp_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">closeReadSelectHelp1</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkImage" id="image39">
+    <property name="visible">True</property>
+    <property name="stock">gtk-info</property>
+  </object>
+  <object class="GtkImage" id="image40">
+    <property name="visible">True</property>
+    <property name="stock">gtk-media-play</property>
+  </object>
+  <object class="GtkWindow" id="window1">
+    <child>
+      <object class="GtkHBox" id="hbox38">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel" id="label40">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">label</property>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkButton" id="button15">
+            <property name="label" translatable="yes">button</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="image_position">right</property>
+            <signal name="clicked" handler="this_function"/>
+          </object>
+          <packing>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
