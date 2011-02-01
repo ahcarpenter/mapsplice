@@ -35,6 +35,8 @@ class MSInterface:
         self.tempCount = 0
         self.readSet = 1
         self.paired = 1
+        self.singleSelected = 1
+        self.pairedSelected = 0
         self.readsAdded = 0
         self.refGenomeAdded = 0
         self.outputPathAdded = 0
@@ -212,7 +214,7 @@ class MSInterface:
             self.configFileWrite.close()
                     
                     
-        if self.ioOkClicked is 0:
+        if self.io_ok_clicked is 0:
             configFile = open("../MapSplice.cfg", "r")
             configFileList = configFile.readlines()
             configFile.close()
@@ -253,12 +255,12 @@ class MSInterface:
                 if segment_length in item:
                     item = segment_length + "18\n"
                     
-                if do_fusion in item:
-                    item = do_fusion + "no\n"
-                
-                if run_MapPER in item:
-                    item = run_MapPER + "no\n"
+#                if do_fusion in item:
+#                    item = do_fusion + "no\n"
+#                if run_MapPER in item:
+#                    item = run_MapPER + "no\n"
                 self.configFileWrite.write(item)
+                
             self.configFileWrite.close()
             self.read_length.set_value(36)
             self.read_len = 36
@@ -413,26 +415,26 @@ class MSInterface:
                         item = reads_file + "\n"
                     if self.readsAdded is 1:
                         item = reads_file + self.reads + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
                         
             
                 if chromosome_files_directory in item:
                     if self.refGenomeAdded is 1:
                         item = chromosome_files_directory + self.chrDirChooser.get_filename() + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
             
                 if Bowtieidx in item:
                     if self.basenameSet is 1:
                         item = Bowtieidx + self.basename + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
 
                 if interested_regions in item and self.regionsOfInterest.get_filename() != None and self.roiActive is 1:
                     item = interested_regions + self.regionsOfInterest.get_filename() + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
                 
                 if avoid_regions in item and self.regionsToAvoidFileButton.get_filename() != None and self.rtaActive is 1:
                     item = avoid_regions + self.regionsToAvoidFileButton.get_filename() + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
 
                 if reads_format in item:
                     button = self.builder.get_object("fastaButton")
@@ -440,7 +442,7 @@ class MSInterface:
                         item = reads_format + "FASTA\n"
                     else:
                         item = reads_format + "FASTQ\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
                     
                 if paired_end in item:
                     button = self.builder.get_object("singleButton")
@@ -448,33 +450,39 @@ class MSInterface:
                         item = paired_end + "no\n"
                     else:
                         item = paired_end + "yes\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
 
                 if read_length in item:
                     button = self.builder.get_object("read_len")
                     if read_length in item:
                         item = read_length + str(button.get_value_as_int()) + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
 
                 if segment_length in item:
                     button = self.builder.get_object("segment_len")
                     if segment_length in item:
                         item = segment_length + str(button.get_value_as_int()) + "\n"
-                    self.configFileWrite.write(item)
+                    #self.configFileWrite.write(item)
                         
                 if output_dir in item and self.outputPathAdded is 1:
                     button = self.builder.get_object("outputPath")
                     item = output_dir + button.get_filename() + "\n"
-                self.configFileWrite.write(item)    
+                    #self.configFileWrite.write(item) 
+
+                self.configFileWrite.write(item)   
                 #self.io_ok_clicked = 0
-        else:
+
+
+        if self.prefOkClicked is 1:
             for item in configFileList:
+                
                 if junction_type in item:
                     button = self.builder.get_object("canonicalRadio")
                     if button.get_active():
                         item = junction_type + "canonical\n"
                     else:
                         item = junction_type + "non-canonical\n"
+                    self.configFileWrite.write(item)
 
                 if full_running in item:
                     button = self.builder.get_object("remapCheck")
@@ -482,11 +490,13 @@ class MSInterface:
                         item = full_running + "yes\n"
                     else:
                         item = full_running + "no\n"
+                    self.configFileWrite.write(item)
 
                 if anchor_length in item:
                     button = self.builder.get_object("anchor_length")
                     if anchor_length in item:
                         item = anchor_length + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if remove_temp_files in item:
                     button = self.builder.get_object("deleteTempCheck")
@@ -494,51 +504,61 @@ class MSInterface:
                         item = remove_temp_files + "yes\n"
                     else:
                         item = remove_temp_files + "no\n"
+                    self.configFileWrite.write(item)
 
                 if segment_mismatches in item:
                     button = self.builder.get_object("segment_mismatches")
                     if segment_mismatches in item:
                         item = segment_mismatches + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if splice_mismatches in item:
                     button = self.builder.get_object("splice_mismatches")
                     if splice_mismatches in item:
                         item = splice_mismatches + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if remap_mismatches in item:
                     button = self.builder.get_object("remap_mismatches")
                     if remap_mismatches in item:
                         item = remap_mismatches + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
                 
                 if min_intron_length in item:
                     button = self.builder.get_object("min_intron_length")
                     if min_intron_length in item:
                         item = min_intron_length + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if max_intron_length in item:
                     button = self.builder.get_object("max_intron_length")
                     if max_intron_length in item:
                         item = max_intron_length + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if threads in item:
                     button = self.builder.get_object("threads")
                     if threads in item:
                         item = threads + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if max_hits in item:
                     button = self.builder.get_object("max_hits")
                     if max_hits in item:
                         item = max_hits + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if max_insert in item:
                     button = self.builder.get_object("max_insert")
                     if max_insert in item:
                         item = max_insert + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if min_output_seg in item:
                     button = self.builder.get_object("min_output_seg")
                     if min_output_seg in item:
                         item = min_output_seg + str(button.get_value_as_int()) + "\n"
+                    self.configFileWrite.write(item)
 
                 if search_whole_chromosome in item:
                     button = self.builder.get_object("searchWholeChr")
@@ -546,6 +566,7 @@ class MSInterface:
                         item = search_whole_chromosome + "yes\n"
                     else:
                         item = search_whole_chromosome + "no\n"
+                    self.configFileWrite.write(item)
 
                 if map_segment_directly in item:
                     button = self.builder.get_object("mapSegDirectly")
@@ -553,22 +574,28 @@ class MSInterface:
                         item = map_segment_directly + "yes\n"
                     else:
                         item = map_segment_directly + "no\n"
-                self.configFileWrite.write(item)
-        for item in configFileList:
-            if run_MapPER in item:
-                button = self.builder.get_object("mapPERButton")
-                if button.get_active():
-                    item = run_MapPER + "yes\n"
+                    self.configFileWrite.write(item)
+                    
+                        
                 else:
-                    item = run_MapPER + "no\n"
-
-            if do_fusion in item:
-                button = self.builder.get_object("fusionCheck")
-                if button.get_active():
-                    item = do_fusion + "yes\n"
-                else:
-                    item = do_fusion + "no\n"
-            self.configFileWrite.write(item)
+                    self.configFileWrite.write(item)
+#===============================================================================
+#        for item in configFileList:
+#            if run_MapPER in item:
+#                button = self.builder.get_object("mapPERButton")
+#                if button.get_active():
+#                    item = run_MapPER + "yes\n"
+#                else:
+#                    item = run_MapPER + "no\n"
+# 
+#            if do_fusion in item:
+#                button = self.builder.get_object("fusionCheck")
+#                if button.get_active():
+#                    item = do_fusion + "yes\n"
+#                else:
+#                    item = do_fusion + "no\n"
+#            self.configFileWrite.write(item)
+#===============================================================================
             
         self.configFileWrite.close()
   
@@ -696,6 +723,8 @@ class MSInterface:
         
     def on_cancelIO_clicked(self, widget):
         self.ioOkClicked = 0
+        #if self.resetClicked is 1:
+            
         parent = widget.get_parent()
         grandparent = parent.get_parent()
         greatgrandparent = grandparent.get_parent()
@@ -1402,9 +1431,15 @@ class MSInterface:
         os.system("ln -f -s mapsplice_interface.py MapSplice")
         os.system("chmod +x MapSplice")
         os.system("gvfs-set-attribute MapSplice metadata::custom-icon " + "file://" + os.path.abspath("shortcut_ico"))
+        
+    #def updateInterface(self):
+        #check setting1 - updates interface to reflect config file
+        #check setting2
+        #check setting3
+        #....
           
 if __name__ == "__main__":
     configInterface = MSInterface()
     configInterface.gettingStarted.show()
-    #configInterface.init_input()
+    configInterface.init_input()
     gtk.main()

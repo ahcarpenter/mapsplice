@@ -2556,9 +2556,9 @@ Andrew Hefley Carpenter
                         <property name="visible">True</property>
                         <property name="orientation">vertical</property>
                         <property name="homogeneous">True</property>
+                        <property name="action">select-folder</property>
                         <property name="filter">gffFilter</property>
                         <property name="create_folders">False</property>
-                        <property name="action">select-folder</property>
                         <property name="width_chars">0</property>
                         <signal name="selection_changed" handler="on_CFD_selection_changed"/>
                       </object>
@@ -2938,9 +2938,9 @@ Andrew Hefley Carpenter
                     <child>
                       <object class="GtkFileChooserButton" id="outputPath">
                         <property name="visible">True</property>
+                        <property name="action">select-folder</property>
                         <property name="create_folders">False</property>
                         <property name="do_overwrite_confirmation">True</property>
-                        <property name="action">select-folder</property>
                         <property name="width_chars">20</property>
                         <signal name="selection_changed" handler="on_outputPathFileButton_file_set"/>
                       </object>
