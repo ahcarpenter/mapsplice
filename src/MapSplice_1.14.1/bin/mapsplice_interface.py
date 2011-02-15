@@ -1437,6 +1437,13 @@ class MSInterface:
         #check setting2
         #check setting3
         #....
+#    def isMapSpliceRunning(self):
+#        #set variable to 1 or 0 depending on whether mapsplice is running
+#        
+#    def setStatisticsText(self):
+#        #sets the text of the statistic dialog
+        
+    
           
 if __name__ == "__main__":
     configInterface = MSInterface()
