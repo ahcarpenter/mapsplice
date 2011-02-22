@@ -105,6 +105,7 @@ class MSInterface:
         self.fusionCheck = self.builder.get_object("fusionCheck")
         self.mapPERButton = self.builder.get_object("mapPERButton")
         self.treestore = gtk.ListStore(str, str, str)
+        self.statsDiag = self.builder.get_object("statsDiag")
         
        
               # create the TreeView using treestore
@@ -643,7 +644,8 @@ class MSInterface:
         self.configFilePath = widget.get_filename()
         
     def on_executeMS_clicked(self, widget):
-        self.update_config_file()
+        print "execute clicked"
+        #self.update_config_file()
         configFile = open(self.configFilePath, "r") #change to ../../MapSplice.cfg
         configFileList = configFile.readlines()
         configFile.close()
@@ -668,9 +670,15 @@ class MSInterface:
                             configFilePath = os.path.split(configFilePath)[0]
                             configFilePath = os.path.split(configFilePath)[0]
                             if self.defaultConfig is 1:
-                                os.system("python " + item3 + " " + configFilePath + self.configFilePath)
+                                #os.system("python " + item3 + " " + configFilePath + self.configFilePath)
+                                os.system("python " + item3 + " " + configFilePath + "MapSplice.cfg")
+                                print "showing stats diag"
+                                self.statsDiag.show()
                             else:
-                                os.system("python " + item3 + " " + self.configFilePath)
+                                #os.system("python " + item3 + " " + self.configFilePath)
+                                os.system("python " + item3 + " " + "MapSplice.cfg")
+                                print "showing stats diag"
+                                self.statsDiag.show()
                         else:
                             self.configFileRead.close()
                             self.envPathInput.show()
@@ -700,7 +708,9 @@ class MSInterface:
             #os.putenv("PATH",os.getenv("PATH") + ":" +self.FileChooserDialog3.get_filename() + "/")
             self.gettingStarted.show()
             configFilePath = self.FileChooserDialog3.get_filename()
-            os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + self.configFilePath)
+            #os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + self.configFilePath)
+            os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + "/MapSplice.cfg")
+            self.statsDiag.show()
         else:
             self.envPathInput.show()
         
