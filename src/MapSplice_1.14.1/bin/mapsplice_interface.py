@@ -51,6 +51,7 @@ class MSInterface:
         self.builder = gtk.Builder()
         self.builder.add_from_file("config_interface.glade")
         self.configFileChooser = self.builder.get_object("configFileChooser")
+        self.workspaceSelect = self.builder.get_object("workspaceSelect")
         self.actionArea = self.builder.get_object("actionArea")
         self.regionsOfInterest = self.builder.get_object("regionsOfInterest")
         self.regionsToAvoidFileButton = self.builder.get_object("regionsToAvoidFileButton")
@@ -1452,11 +1453,13 @@ class MSInterface:
 #        
 #    def setStatisticsText(self):
 #        #sets the text of the statistic dialog
-        
-    
-          
+
+   def widgetUpdate(item, widget):
+                  
 if __name__ == "__main__":
     configInterface = MSInterface()
     configInterface.gettingStarted.show()
+    configInterface.workspaceSelect.show()
     configInterface.init_input()
+    configInterface.conTest()
     gtk.main()
