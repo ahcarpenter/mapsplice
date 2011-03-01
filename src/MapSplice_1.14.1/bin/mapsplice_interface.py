@@ -1454,12 +1454,12 @@ class MSInterface:
 #    def setStatisticsText(self):
 #        #sets the text of the statistic dialog
 
-   def widgetUpdate(item, widget):
+   #def widgetUpdate(item, widget):
                   
 if __name__ == "__main__":
     configInterface = MSInterface()
     configInterface.gettingStarted.show()
     configInterface.workspaceSelect.show()
     configInterface.init_input()
-    configInterface.conTest()
+    #configInterface.conTest()
     gtk.main()
