@@ -4,6 +4,8 @@
 # Date: 20 August 2010
 
 import sys
+import time
+import gobject
 try:
     import gtk
 except:
@@ -44,6 +46,7 @@ class MSInterface:
         self.row = 0
         self.configFilePath = "../MapSplice.cfg"
         self.defaultConfig = 1
+        self.gettingStartedShown = 0
        
         settings = gtk.settings_get_default()
         settings.props.gtk_button_images = True
@@ -712,6 +715,7 @@ class MSInterface:
             #os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + self.configFilePath)
             os.system("python " + self.FileChooserDialog3.get_filename() + "/mapsplice_segments.py " + os.path.split(configFilePath)[0] + "/MapSplice.cfg")
             self.statsDiag.show()
+            #
         else:
             self.envPathInput.show()
         
@@ -1455,11 +1459,33 @@ class MSInterface:
 #        #sets the text of the statistic dialog
 
    #def widgetUpdate(item, widget):
-                  
+   
+#    def progressCheck(self):
+#       asdfasfd
+
+    def launchGS(self, widget):
+        self.gettingStarted.show()              ##
+        start = time.time()
+        while ((time.time() - start) < 2):
+               print "counting"
+               yield True
+        self.gettingStarted.hide() #
+        #yield False
+        
+        #yield False
+        
+    def virtualThread(self):
+        task = self.launchGS(self)   #place the function callback here for when it's idle
+        gobject.idle_add(task.next)
+                 
 if __name__ == "__main__":
     configInterface = MSInterface()
-    configInterface.gettingStarted.show()
-    configInterface.workspaceSelect.show()
-    configInterface.init_input()
+    
+    #configInterface.workspaceSelect.show()
+    #configInterface.init_input()
+    #configInterface.updateProgressBar()
     #configInterface.conTest()
+    #self.
+    configInterface.virtualThread()
     gtk.main()
+    
