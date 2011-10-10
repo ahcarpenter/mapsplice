@@ -1267,7 +1267,7 @@ class MSInterface:
     #    self.configFileWrite.close()
     #===========================================================================
        
-# Help Boxes   
+# Help Boxes            TODO: REFACTOR!!!
     def on_helpCloseButton_clicked(self, widget):
         parent = widget.get_parent()
         grandparent = parent.get_parent()
