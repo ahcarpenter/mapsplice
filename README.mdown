@@ -4,9 +4,9 @@ MapSplice is an algorithm for mapping RNA-seq data to reference genome for splic
 
 Screenshots
 ---------
-[![](http://i52.tinypic.com/243eo9c.png)](http://i52.tinypic.com/243eo9c.png)
 [![](http://i51.tinypic.com/352lnhi.png)](http://i51.tinypic.com/352lnhi.png) 
 [![](http://i51.tinypic.com/35j9spi.png)](http://i51.tinypic.com/35j9spi.png)
+[![](http://i52.tinypic.com/243eo9c.png)](http://i52.tinypic.com/243eo9c.png)
 [![](http://i54.tinypic.com/2whqcyb.png)](http://i54.tinypic.com/2whqcyb.png)
 [![](http://i55.tinypic.com/2qmgh3c.png)](http://i55.tinypic.com/2qmgh3c.png)
 [![](http://i54.tinypic.com/2na40pk.png)](http://i54.tinypic.com/2na40pk.png)
